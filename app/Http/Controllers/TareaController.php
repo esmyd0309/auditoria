@@ -9,6 +9,7 @@ use App\Tempgestione;
 use App\Estado;
 use App\Gestion;
 use App\Plantilla;
+use App\Asterisk;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Carbon\Carbon;
@@ -31,8 +32,18 @@ class TareaController extends Controller
         ->departamento($departamento)
         ->status($status)
         ->paginate(5);
-        
-    
+
+        /**
+         * Lllamar datos de otro servidor
+         */
+
+        //Instancio el modelo de mi base de datos
+        $death = new Asterisk;
+        //seteo mi conecion, ya con mi peticion del modelo
+        $death->setConnection('asterisk');
+        //defino el rango de mi consulta 
+        $joffrey = $death->find(1);
+        //dd($joffrey);
       
         $gestionestem = Tempgestione::all();
         $cantidad = Tempgestione::where('status', '=', 'on')->count();
