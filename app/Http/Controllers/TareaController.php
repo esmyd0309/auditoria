@@ -97,13 +97,13 @@ class TareaController extends Controller
        ->get();
 
         //tengo la cantidad encontrada en la tabla gestiones, segun el flitro suministrado ------
-        $gestionx =   DB::table('gestions')->where('estados_id', $tarea->estados_id) 
+       /* $gestionx =   DB::table('gestions')->where('estados_id', $tarea->estados_id) 
         ->Where('departamentos_id', $tarea->departamentos_id)
         ->Where('fecha','>=', $tarea->fechadesde)
-        ->Where('fecha','<=', $tarea->fechahasta )->count();  
+        ->Where('fecha','<=', $tarea->fechahasta )->count();  */
       
-        if($tarea->cantidad_registros <= $gestionx)
-        {
+        /*if($tarea->cantidad_registros <= $gestionx)
+        {*/
             $tarea->save();
 
                ///validar que solo se guarde una cedula por agente
@@ -140,11 +140,11 @@ class TareaController extends Controller
             }
               return redirect()->route('tarea')
                 ->with('info', 'Tarea Guardada con Éxito'); 
-        }else {
+        /*}else {
 
             return redirect()->route('tarea.create')
                 ->with('info', 'No cuenta con la cantidad De gestiones Solicitadas'); 
-        }   
+        }   */
 
 
 
