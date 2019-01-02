@@ -100,6 +100,7 @@ class TareaController extends Controller
       $tarea->fechahasta = $request->fechahasta;
       $tarea->cerrada = 'on';
         
+      
       //obtengo los registros que cumplen con el id del departamento y el del id del estatus. 
       $gestionss =   DB::table('gestions')->where('estados_id', $tarea->estados_id) 
       ->Where('departamentos_id', $tarea->departamentos_id)

@@ -84,9 +84,12 @@ class EvaluacionController extends Controller
        
         $gestion_id = $id;//id de la gestion
       
-      $plantillaALL = Tempgestione::where('gestions_id',$gestion_id)->get();///consultar datos de la gestion
-        foreach ($plantillaALL as  $plantilla) {
-            
+      //$plantillaALL = Tempgestione::where('gestions_id',$gestion_id)->get();///consultar datos de la gestion
+      $plantillaALL = Tarea::where('id',$tarea)->get();///consultar datos de la gestion
+ 
+      
+      foreach ($plantillaALL as  $plantilla) {
+    
             $plantillas = Plantilla::where('id',$plantilla->plantillas_id)->get();//obtener la plantilla
            
            

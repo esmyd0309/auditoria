@@ -44,23 +44,33 @@
                 <tbody>
               
                 @foreach ($gestiontm as $gestiontms)
-        
+          
+                    @if($evaluaciones!=$gestiontms->id)
                 <tr >
+                <!--
                     <td class='text-center'><small class="text-muted">{{ $gestiontms->id }}</small></td> 
-                    <td class='text-center'><small class="text-muted">{{ $gestiontms->gestion->agente }}</small></td> 
-                    <td class='text-center'><small class="text-muted">{{ $gestiontms->gestion->supervisor }}</small></td> 
-                    <td class='text-center'><small class="text-muted">{{ $gestiontms->gestion->nombres_cliente }}</small></td>
-                    <td class='text-center'><small class="text-muted">{{ $gestiontms->gestion->cedula }}</small></td>
-                    <td class='text-center'><small class="text-muted">{{ $gestiontms->gestion->fecha }}</small></td>
-               
-
+                    <td class='text-center'><small class="text-muted">{{ $gestiontms->agente }}</small></td> 
+                    <td class='text-center'><small class="text-muted">{{ $gestiontms->supervisor }}</small></td> 
+                    <td class='text-center'><small class="text-muted">{{ $gestiontms->nombres_cliente }}</small></td>
+                    <td class='text-center'><small class="text-muted">{{ $gestiontms->cedula }}</small></td>
+                    <td class='text-center'><small class="text-muted">{{ $gestiontms->fecha }}</small></td>
+                -->
+                    <td class='text-center'><small class="text-muted">{{ $gestiontms->id }}</small></td> 
+                    <td class='text-center'><small class="text-muted">{{ $gestiontms->agente }}</small></td> 
+                    <td class='text-center'><small class="text-muted">{{ $gestiontms->supervisor }}</small></td> 
+                    <td class='text-center'><small class="text-muted">{{ $gestiontms->nombres_cliente }}</small></td>
+                    <td class='text-center'><small class="text-muted">{{ $gestiontms->cedula }}</small></td>
+                    <td class='text-center'><small class="text-muted">{{ $gestiontms->fecha }}</small></td>
+                
+                
                     <td class='text-center'>
-                    <a href="{{ route('evaluacion.proce', [$gestiontms->gestion->id,$gestiontms->tareas_id]) }}" class="btn btn-success btn-xs">Evaluar</a>
-                  
+              
+
+                  <a href="{{ route('evaluacion.proce', [$gestiontms->id,$idtarea]) }}" class="btn btn-success btn-xs">Evaluar</a>
                 </tr>
              
                            
-
+                @endif
 
 
 
@@ -74,7 +84,7 @@
                
              </table>
 
-              {!! $gestiontm->render() !!}
+          
                
                 </div>
                

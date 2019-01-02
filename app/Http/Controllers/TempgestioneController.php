@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Tempgestione;
 use DB;
+use App\Evaluacion;
+use App\Asterisk;
+use doesntExist;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 class TempgestioneController extends Controller
@@ -17,11 +20,28 @@ class TempgestioneController extends Controller
     public function index(Request $request, $id)
     {
        $idtarea = $id;
+      // $evaluaciones = Evaluacion::where('tarea_id',$idtarea)->get();//obtengo las gestiones que actualmente estan con esta tarea
+       $evaluaciones = DB::table('evaluacions')->select('gestions_id')->where('tarea_id',$idtarea)->get();
+     foreach ($evaluaciones as  $evaluacione) {
+       $evaluaciones =$evaluacione->gestions_id;
+     }
+ 
+        /* 
+        *$gestiontm=Tempgestione::orderBy('id', 'DESC')->where('status','on')->where('tareas_id',$idtarea)
+        */
+        
+        /**
+         * Lllamar datos de otro servidor
+         */
 
-        $gestiontm=Tempgestione::orderBy('id', 'DESC')->where('status','on')->where('tareas_id',$idtarea)
-        ->paginate(5);
-  
-        return view('temp.index', compact('gestiontm','idtarea'));
+        //Instancio el modelo de mi base de datos
+            $death = new Asterisk;
+            //seteo mi conecion, ya con mi peticion del modelo
+            $death->setConnection('asterisk');
+            //defino el rango de mi consulta 
+            $gestiontm = $death->all();//muestros las gestiones las cuales no han sido tocadas en mi tarea.
+
+        return view('temp.index', compact('gestiontm','idtarea','evaluaciones'));
     }
 
     /**
