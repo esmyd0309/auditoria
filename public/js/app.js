@@ -49239,3 +49239,24 @@ var bus = new Vue();
 
 /***/ })
 /******/ ]);
+
+document.querySelector('.confirm_delete').addEventListener('submit', function(e) {
+    var form = this;
+    e.preventDefault();
+    swal({
+        title: "¿Estas seguro que deseas eliminar este registro?",
+        text: "Si eliminas este registro, no podras recuperarlo",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: '#DD6B55',
+        confirmButtonText: '¡Si, estoy seguro!',
+        cancelButtonText: "Cancelar",
+        closeOnConfirm: false,
+        closeOnCancel: true
+    },
+    function(isConfirm) {
+        if (isConfirm) {
+            form.submit();
+        }
+    });
+});

@@ -3,7 +3,7 @@
 
 @section('content')
 
-@section('content')
+
 @if ($errors->any())
 <div class="alert alert-danger">
     @foreach($errors->all() as $error)
@@ -11,7 +11,7 @@
     @endforeach
 </div>
 @endif
-  
+
 
 <div class="container">
     <div class="row justify-content-center">
@@ -25,9 +25,9 @@
                 
                 @endforeach 
               
-                         {!!Form::open(['route' => 'evaluacion.store','method' => 'POST'])!!}
+                         {!!Form::open(['route' => 'evaluacion.store','method' => 'POST','enctype'=> 'multipart/form-data'])!!}
                     @csrf
-                 
+                    {{csrf_field()}}
               
 
                     <div class="card-body ">
@@ -70,10 +70,6 @@
                                     </div>
                                
                                 
-
-
-
-
                                   
                             @endforeach 
                            
@@ -88,19 +84,33 @@
                             <input name="gestion_id" type="hidden" value="{{$gestion_id}}">
                             <input name="plantillas_id" type="hidden" value="{{$plantilla_id}}">
                             <input name="tareas_id" type="hidden" value="{{$tarea}}">
+                            <input name="seg" type="hidden" value="{{ $seg }}">
                         <!--- fin de las varibles escondidas para enviar al controladr-->
 
-                            <div class="form-group">
-                                <label for="exampleFormControlFile1"><strong>Adjuntar Audio</strong></label>
-                                <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                            </div>
-                    </div>
+                           
+
+                        @foreach ($audiox as $audioxs)
+                            <audio controls="" preload="none"> 
+                                <source src="{{ $audioxs->location }}" type="audio/mp3">
+                                    No es compatible con la reproducción de audio del navegador
+                                 
+                            </audio><br>
+                           <label for="" class="btn btn-sm">{{ $audioxs->start_time }}</label> 
+                            
+                    
+                            <input name="file" type="hidden" value=" {{ $audioxs->location }} ">
+                    @endforeach 
                     <div class="row justify-content-center">
-                       
+                  
+                           
                    
-                    {{ form::submit('Gurdar', ['class' => 'btn btn-sm btn-primary']) }}
+                    {{ form::submit('Guardar', ['class' => 'btn btn-sm btn-primary']) }}
+                    |||
+    <a class="btn btn-sm btn-success" href="{{ route('tarea') }}">Volver</a>
                         </div>
-                
+                        
+    
+    
                 </div>
             </div>
         </div>

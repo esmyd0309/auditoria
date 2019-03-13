@@ -9,7 +9,7 @@ class Plantilla extends Model
     protected $table = 'plantillas';
    
     protected $fillable = [
-        'users_id', 'nombre','descripcion', 'gestion','status','ciudad', 'maxima_calificacion',
+        'users_id', 'nombre','descripcion', 'gestion','status','ciudad', 'maxima_calificacion','filenames',
     ];
    
     public function preguntas()
@@ -20,6 +20,11 @@ class Plantilla extends Model
     public function tareas()
     {
         return $this->hasMany('App\Tarea','plantillas_id');
+    }
+
+    public function evaluaciones()
+    {
+        return $this->belongsTo('App\Evaluacion');
     }
 
    

@@ -8,10 +8,15 @@ use App\Pregunta;
 use Carbon\Carbon;
 use Auth;
 use Valach;
-
+use Illuminate\Support\Facades\Storage;
 use DB;
 class PlantillaController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -178,4 +183,42 @@ class PlantillaController extends Controller
         $plantilla->delete();
         return redirect()->route('plantillas.index')->with('info', 'Eliminado Correctamente');
     }
+
+   
+    public function subir()
+    {
+        return view('media');
+    }
+
+       
+    public function ingresa(Request $request)
+    {
+       //dd($request);
+        $usuario = auth()->id();
+       
+      
+        $plantilla = new Plantilla;
+        $plantilla->filenames = request()->file->storeAs('uploads', request()->file->getClientOriginalName());
+
+
+        $plantilla->users_id = $usuario;
+        $plantilla->save();
+        request()->file->storeAs('uploads', request()->file->getClientOriginalName());
+        return view('media')->with('info', 'archivo subida con Éxito');
+    }
+
+
+    public function ver($id)
+    {
+        
+        $plantilla = Plantilla::select('filenames')->where('id','=',$id)->get();
+        foreach($plantilla as $plantillas){
+       $plantilla=$plantillas->filenames;
+        }
+        return Storage::download("$plantilla");
+        
+    }
+  
+
+
 }

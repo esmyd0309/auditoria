@@ -10,7 +10,7 @@ class Tarea extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'nombre', 'descripcion','cantidad_registros','registros_agentes', 'fecha', 'status','departamentos_id','estado','fechadesde','fechahasta','plantillas_id',
+        'nombre', 'descripcion','cantidad_registros','registros_agentes', 'fecha', 'status','departamentos_id','estados','fechadesde','fechahasta','plantillas_id',
     ];
 
 
@@ -19,21 +19,25 @@ class Tarea extends Model
         return $this->hasMany('App\Tempgestione','tareas_id');
     }
 
-    public function departamentos()
+    public function grupos()
     {
-        return $this->belongsTo('App\Departamento');
+        return $this->belongsTo('App\Departamento','user_group');
     }
-
 
     public function estados()
     {
-        return $this->belongsTo('App\Estados');
+        return $this->belongsTo('App\Estados', 'status');
     }
 
     
     public function plantilla()
     {
         return $this->belongsTo('App\Plantilla','plantillas_id');
+    }
+
+    public function evaluacion()
+    {
+        return $this->hasMany('App\Evaluacion');
     }
 
 

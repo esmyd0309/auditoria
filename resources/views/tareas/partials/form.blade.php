@@ -28,7 +28,7 @@
 <select name="departamentos_id" class="browser-default custom-select" class="form-control{{ $errors->has('departamentos_id') ? ' is-invalid' : ''  }}" autofocus>
     <option value="">-- Departamento --</option>
     @foreach ($departamento as $departamentos)
-        <option value="{{ $departamentos->id }}">{{ $departamentos->nombre }} {{ $departamentos->supervisora }}</option>
+        <option value="{{ $departamentos->user_group }}">{{ $departamentos->user_group }} </option>
     @endforeach
     @if ($errors->has('departamentos_id'))
         <span class="invalid-feedback" role="alert">
@@ -56,15 +56,15 @@
 
 
 <div class="form-group">
-{{ form::label('estados_id', 'Estados de Gestion') }}
-<select name="estados_id" class="browser-default custom-select" class="form-control{{ $errors->has('estados_id') ? ' is-invalid' : ''  }}" autofocus>
+{{ form::label('estados', 'Estados de Gestion') }}
+<select name="estados" class="browser-default custom-select" class="form-control{{ $errors->has('estados') ? ' is-invalid' : ''  }}" autofocus>
     <option value="">-- Estados --</option>
     @foreach ($estado as $estados)
-        <option value="{{ $estados->id }}">{{ $estados->nombre }} {{ $estados->supervisora }}</option>
+        <option value="{{ $estados->status }}"> {{ $estados->status }}  ->     {{ $estados->status_name }}</option>
     @endforeach
-    @if ($errors->has('estados_id'))
+    @if ($errors->has('estados'))
         <span class="invalid-feedback" role="alert">
-            <strong>{{ $errors->first('estados_id') }}</strong>
+            <strong>{{ $errors->first('estados') }}</strong>
         </span>
     @endif
 </select>
@@ -92,5 +92,5 @@
         </div>
        
 <div class="form-group">
-    {{ form::submit('Gurdar', ['class' => 'btn btn-sm btn-primary']) }}
+    {{ form::submit('Guardar', ['class' => 'btn btn-sm btn-primary']) }}
 </div>

@@ -10,12 +10,18 @@ use App\Estado;
 use App\Gestion;
 use App\Plantilla;
 use App\Asterisk;
+use App\PreguntaRespuesta;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Carbon\Carbon;
 use DB;
 class TareaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+   
     /**
      * Display a listing of the resource.
      *
@@ -46,6 +52,7 @@ class TareaController extends Controller
         //dd($joffrey);
       
         $gestionestem = Tempgestione::all();
+        
         $cantidad = Tempgestione::where('status', '=', 'on')->count();
        
         
@@ -64,7 +71,8 @@ class TareaController extends Controller
     {
 
         $departamento = Departamento::all();
-        $estado = Estado::all();
+        $estado = Estado::where('selectable','=','Y')->get();
+        //dd($estado);
         $plantilla = Plantilla::all();
         return view('tareas.create',compact('departamento','estado','plantilla'));
     }
@@ -87,10 +95,10 @@ class TareaController extends Controller
       $tarea->users_id = $usuario;
     
       $tarea->plantillas_id = $request->plantillas_id;
-      
+      $tarea->nombre = $request->nombre;
       $tarea->descripcion = $request->descripcion;
       $tarea->departamentos_id = $request->departamentos_id;
-      $tarea->estados_id = $request->estados_id;
+      $tarea->estados = $request->estados;
 
       $tarea->cantidad_registros = $request->cantidad_registros;
       $tarea->registros_agentes = $request->registros_agentes;
@@ -102,14 +110,14 @@ class TareaController extends Controller
         
       
       //obtengo los registros que cumplen con el id del departamento y el del id del estatus. 
-      $gestionss =   DB::table('gestions')->where('estados_id', $tarea->estados_id) 
+      $gestionss =   DB::table('gestions')->where('estados', $tarea->estados) 
       ->Where('departamentos_id', $tarea->departamentos_id)
       ->Where('fecha','>=', $tarea->fechadesde)
       ->Where('fecha','<=', $tarea->fechahasta )
        ->get();
 
         //tengo la cantidad encontrada en la tabla gestiones, segun el flitro suministrado ------
-       /* $gestionx =   DB::table('gestions')->where('estados_id', $tarea->estados_id) 
+       /* $gestionx =   DB::table('gestions')->where('estados', $tarea->estados) 
         ->Where('departamentos_id', $tarea->departamentos_id)
         ->Where('fecha','>=', $tarea->fechadesde)
         ->Where('fecha','<=', $tarea->fechahasta )->count();  */
@@ -131,7 +139,7 @@ class TareaController extends Controller
 
                     /**
                      * validar que solo se guarnden la cantidad de registros por agente.
-                     *  $agentes = Gestion::select('agente')->Where('estados_id',$tarea->estados_id )
+                     *  $agentes = Gestion::select('agente')->Where('estados',$tarea->estados )
                      *  ->Where('id',$gestion->id )
                      *  ->get();
                      * 

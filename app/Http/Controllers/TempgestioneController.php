@@ -7,7 +7,8 @@ use App\Tempgestione;
 use DB;
 use App\Evaluacion;
 use App\Asterisk;
-use doesntExist;
+use App\Vicidial_list;
+use App\Vicidial_log;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 class TempgestioneController extends Controller
@@ -20,27 +21,41 @@ class TempgestioneController extends Controller
     public function index(Request $request, $id)
     {
        $idtarea = $id;
-      // $evaluaciones = Evaluacion::where('tarea_id',$idtarea)->get();//obtengo las gestiones que actualmente estan con esta tarea
-       $evaluaciones = DB::table('evaluacions')->select('gestions_id')->where('tarea_id',$idtarea)->get();
-     foreach ($evaluaciones as  $evaluacione) {
-       $evaluaciones =$evaluacione->gestions_id;
-     }
  
-        /* 
-        *$gestiontm=Tempgestione::orderBy('id', 'DESC')->where('status','on')->where('tareas_id',$idtarea)
-        */
-        
-        /**
-         * Lllamar datos de otro servidor
-         */
+       $evaluaciones = DB::table('evaluacions')->select('gestions_id')->where('tarea_id',$idtarea)->get();
+   
 
-        //Instancio el modelo de mi base de datos
-            $death = new Asterisk;
-            //seteo mi conecion, ya con mi peticion del modelo
-            $death->setConnection('asterisk');
-            //defino el rango de mi consulta 
-            $gestiontm = $death->all();//muestros las gestiones las cuales no han sido tocadas en mi tarea.
 
+     //sacar el grupo
+     
+     $grupos = DB::table('tareas')->select('departamentos_id')->where('id',$idtarea)->get();
+     foreach ($grupos as  $grupo) {
+       $grupos =$grupo->departamentos_id;
+     }
+
+      //sacar el estatus
+     $estados = DB::table('tareas')->select('estados')->where('id',$idtarea)->get();
+     foreach ($estados as  $estado) {
+       $estados =$estado->estados;
+     }
+  
+
+
+      if ($evaluaciones!=''){
+        $gestiontm = Vicidial_log::where('user_group',$grupos)->where('status',$estados)->orderBy('uniqueid', 'desc')
+        ->limit(15)
+        ->get();
+         
+       // dd($gestiontm);
+     return view('temp.index', compact('gestiontm','idtarea','evaluaciones'));
+      }
+
+      
+           $gestiontm = Vicidial_log::where('user_group',$grupos)->where('status',$estados)->orderBy('uniqueid', 'desc')
+           ->limit(15)
+           ->get();
+            
+           //dd($r);
         return view('temp.index', compact('gestiontm','idtarea','evaluaciones'));
     }
 

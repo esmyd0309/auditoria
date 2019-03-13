@@ -6,15 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Departamento extends Model
 {
-    protected $table = 'departamentos';
-    protected $primaryKey = 'id';
 
-    protected $fillable = [
-        'nombre', 'status', ];
+    protected $connection = 'asterisk';
+    protected $table = 'vicidial_user_groups';
 
     public function tarea()
     {
-        return $this->belongsTo('App\Tarea', 'departamentos_id');
+        return $this->hasMany('App\Tarea','tareas_id');
     }
 
 }

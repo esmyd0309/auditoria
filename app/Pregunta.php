@@ -27,6 +27,10 @@ class Pregunta extends Model
         return $this->hasMany('App\Respuesta', 'preguntas_id');//una image puede tener muchos likes
     }
 
+    public function preguntarespuesta(){
+        return $this->hasMany('App\PreguntaRespuesta', 'preguntas_id');//una image puede tener muchos likes
+    }
+
   
 
   /*  public static function preguntas($id){

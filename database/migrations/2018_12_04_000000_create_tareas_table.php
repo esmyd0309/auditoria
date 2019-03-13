@@ -27,7 +27,7 @@ class CreateTareasTable extends Migration
             $table->integer('users_id')->unsigned();
             $table->integer('plantillas_id')->unsigned();
             $table->integer('departamentos_id')->unsigned();
-            $table->integer('estados_id')->unsigned();
+            $table->integer('estados_id');
             $table->string('nombre')->nullable();
             $table->string('descripcion')->nullable();
             $table->integer('cantidad_registros')->nullable();
@@ -37,7 +37,7 @@ class CreateTareasTable extends Migration
 
             $table->foreign('users_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('departamentos_id')->references('id')->on('departamentos')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('estados_id')->references('id')->on('estados')->onUpdate('cascade')->onDelete('cascade');
+            //$table->foreign('estados_id')->references('id')->on('estados')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('plantillas_id')->references('id')->on('plantillas')->onUpdate('cascade')->onDelete('cascade');
         });
     }

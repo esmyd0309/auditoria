@@ -19,7 +19,7 @@
                         <div class="col-sm-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <a  href="{{ url('/plantillas') }}" ><img class="card-img-top" src="http://roles.com/gestiones.png" width="100px" height="100px" alt="Card image cap"></a>
+                                    <a  href="{{ url('/plantillas') }}" ><img class="card-img-top" src="http://192.168.1.107/auditoria/public/gestiones.png" width="100px" height="100px" alt="Card image cap"></a>
                                     <h5 class="card-title"> <b> Gestiones</b>  </h5><br>
                                 </div>
                             </div>
@@ -29,7 +29,7 @@
                         <div class="col-sm-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <a  href="{{ url('/plantillas') }}" ><img class="card-img-top" src="http://roles.com/indicadores.png" width="100px" height="100px" alt="Card image cap"></a>
+                                    <a  href="{{ url('/plantillas') }}" ><img class="card-img-top" src="http://192.168.1.107/auditoria/public/indicadores.png" width="100px" height="100px" alt="Card image cap"></a>
                                             <h5 class="card-title"> <b> Indicadores</b>  </h5><br>
                                 </div>
                             </div>
@@ -41,7 +41,7 @@
                         <div class="col-sm-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <a  href="{{ url('/users') }}" ><img class="card-img-top" src="http://roles.com/users.jpg" width="100px" height="100px" alt="Card image cap"></a>
+                                    <a  href="{{ url('/users') }}" ><img class="card-img-top" src="http://192.168.1.107/auditoria/public/users.jpg" width="100px" height="100px" alt="Card image cap"></a>
                                     <h5 class="card-title"> <b> Usuarios</b>  </h5>
                                 </div>
                             </div>

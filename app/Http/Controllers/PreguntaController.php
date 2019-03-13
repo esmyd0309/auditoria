@@ -11,6 +11,10 @@ use Auth;
 use Illuminate\Http\Request;
 class PreguntaController extends Controller
 {
+
+
+
+    
     /**
      * Display a listing of the resource.
      *

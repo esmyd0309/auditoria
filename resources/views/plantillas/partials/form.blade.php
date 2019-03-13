@@ -25,5 +25,5 @@
 
 
 <div class="form-group">
-    {{ form::submit('Gurdar', ['class' => 'btn btn-sm btn-primary']) }}
+    {{ form::submit('Guardar', ['class' => 'btn btn-sm btn-primary']) }}
 </div>

@@ -10,7 +10,7 @@ class Evaluacion extends Model
     protected $table = 'evaluacions';
 
     
-    protected $fillable = ['users_id', 'gestions_id','plantillas_id', 'hora','fecha','grabacion', 'comentario', 'cantidad_evaluar','calificacion',];
+    protected $fillable = ['users_id', 'gestions_id','plantillas_id','tarea_id' ,'hora','fecha','grabacion', 'comentario', 'cantidad_evaluar','calificacion','agente',];
    
 
   
@@ -27,17 +27,25 @@ class Evaluacion extends Model
      */
     public function users()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User','users_id');
     }
 
     public function plantillas()
     {
-        return $this->hasMany('App\Plantilla','plantillas_id');
+        return $this->belongsTo('App\Plantilla','plantillas_id');
     }
 
-
-    public function plantilla()
+    public function tarea()
     {
-        return $this->belongsTo('App\Plantilla');
+        return $this->belongsTo('App\Tarea','tarea_id');
     }
+
+
+    public function respuestas()
+    {
+        return $this->belongsTo('App\PreguntaRespuesta','evaluacions_id');
+    }
+
+
+  
 }

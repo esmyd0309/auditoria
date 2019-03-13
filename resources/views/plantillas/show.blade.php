@@ -15,7 +15,7 @@
                             {!! Form::open(['route' => ['plantillas.destroy', $plantilla->id],
                             'method' => 'DELETE']) !!}
 
-                                <button class="btn btn-sm btn-danger">
+                                <button class="btn btn-sm btn-danger" onclick="return confirm('¿ ESTAS SEGURO QUE DESEAS ELIMINAR ?')">
                                     Eliminar
                                 </button>
                             {!! Form::close() !!}
@@ -28,6 +28,9 @@
                     <p><strong>Gestion</strong> {{ $plantilla->gestion }}</p>
                     <p><strong>Ciudad</strong> {{ $plantilla->ciudad }}</p>
                     <p><strong>Maxima Calificacion</strong> {{ $plantilla->maxima_calificacion }}</p>
+                    <p><strong>archivo</strong> {{ $plantilla->filename }}</p>
+                    <a href="{{ route('media.ver', $plantilla->id) }}" 
+                                            class="btn btn-sm btn-default">descargar</a>
                 </div>
             </div>
             <div class="card-body">
@@ -56,6 +59,7 @@
 
                                         <a href="{{ route('preguntas.show', $preguntas->id) }}" 
                                             class="btn btn-sm btn-default">Detalle</a>
+                                            
                                         @endcan
                                     </td>
                                     
@@ -65,7 +69,7 @@
                                             {!! Form::open(['route' => ['preguntas.destroy', $preguntas->id, $plantilla->id],
                                                 'method' => 'DELETE']) !!}
 
-                                                <button class="btn btn-sm btn-danger">
+                                                <button class="btn btn-sm btn-danger" onclick="return confirm('¿ ESTAS SEGURO QUE DESEAS ELIMINAR ?')">
                                                     Eliminar
                                                 </button>
                                             {!! Form::close() !!}

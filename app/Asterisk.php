@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Asterisk extends Model
 {
-    protected $table = 'gestiones';
-    protected $primaryKey = 'id';
+    protected $table = 'vicidial_users';
+    protected $primaryKey = 'user_id';
 
     protected $connection = 'asterisk';
 }

@@ -9,25 +9,10 @@
     <div class="col-md-1">
         <label>Busqueda Avanzada</label> 
         </div>
-        <div class="d-inline-block align-top" class="col-md-6" > 
+     <!--   <div class="d-inline-block align-top" class="col-md-6" > 
              
-                {!! Form::open(['route'=> 'gestion', 'method' => 'GET', 'class' => 'form-inline pull-right']) !!}
-                
-                {{ Form::text('agente', null, ['class' => 'form-control', 'placeholder' => 'Agente']) }}
-            
-                {{ Form::text('supervisor', null, ['class' => 'form-control', 'placeholder' => 'Supervisor']) }}
-                
-                {{ Form::text('nombres_cliente', null, ['class' => 'form-control', 'placeholder' => 'Nombres Cliente']) }}
-
               
-                
-                    <button type='submit' class='btn btn-default'>
-                    <span class="glyphicon glyphicon-search">BUSCAR</span>
-                    </button>
-      
-
-{!! Form::close() !!}
-
+-->
 </div>
 <div class="col-md-2">
              <a href="" class="btn btn-primary"></a>
@@ -43,33 +28,44 @@
         <div class="col-md-12">
             <div class="card">
             
-                <div class="alert alert-success" class="card-header"  >Listado de Gestiones</div>
+                <div class="alert alert-success" class="card-header"  >Listado de gestiontmes</div>
                 
              <table >
                 <thead class="thead-dark">
                     
-                <th  class='text-center'>Agente</th>
-                <th class='text-center'>Supervisor</th>
-                <th class='text-center'>Nombres Del Cliente</th>
-                <th class='text-center'>Cedula del cliente</th>
-                <th class='text-center'>Fecha De Ingreso</th>
+                <th  class='text-center'>Usuario</th>
+                <th class='text-center'>Plantilla</th>
+                <th class='text-center'>Tarea</th>
+                <th class='text-center'>Gestion</th>
+                <th class='text-center'>Calificacion</th>
+                <th class='text-center'>Grabaciones</th>
              
                
                 <center><th  class='text-center'>Accion</th></center>
                 </thead>
                 <tbody>
               
-                @foreach ($gestion as $gestions)
+                @foreach ($gestiontm as $gestiontms)
                 <tr >
-                    <td class='text-center'><small class="text-muted">{{ $gestions->agente }}</small></td> 
-                    <td class='text-center'><small class="text-muted">{{ $gestions->supervisor }}</small></td> 
-                    <td class='text-center'><small class="text-muted">{{ $gestions->nombres_cliente }}</small></td>
+
+                
+                    <td class='text-center'><small class="text-muted">{{ $gestiontms->users->name }}</small></td> 
+                    <td class='text-center'><small class="text-muted">{{ $gestiontms->plantillas->nombre }}</small></td>
+                    <td class='text-center'><small class="text-muted">{{ $gestiontms->tarea->nombre }}</small></td>
+                    <td class='text-center'><small class="text-muted">{{ $gestiontms->gestions_id }}</small></td> 
+                    
+                    <td class='text-center'><small class="text-muted">{{ $gestiontms->calificacion }}</small></td>
+                    <td class='text-center'><small class="text-muted">
+                        <audio controls="" preload="none"> 
+                                    <source src="{{ $gestiontms->grabacion }}" type="audio/mp3">
+                                        No es compatible con la reproducción de audio del navegador
+                        </audio>
+                    </small></td>
                     <td class='text-center'><small class="text-muted"></small></td>
-                    <td class='text-center'><small class="text-muted">{{ $gestions->fecha }}</small></td>
                     
                     
-                    <td class='text-center'><a href="{{ route('gestion.show', $gestions->id) }}" class="btn btn-success btn-xs">Detalle</a>
-                    <a href="{{ route('evaluacion.show', $gestions->id) }}"  class="btn btn-danger btn-xs">Evaluar</a>
+                    <td class='text-center'><a href="{{ route('actualicions.detalle',$gestiontms->id) }}" class="btn btn-success btn-xs">Detalle</a>
+                   
                     <a href="#"  class="btn btn-default btn-xs">Descargar</a></td>
                 </tr>
                 <span class="fi-icon-name" title="icon name" aria-hidden="true"></spa
@@ -78,7 +74,6 @@
           
              </table>
 
-              {!! $gestion->render() !!}
                
                 </div>
             </div>

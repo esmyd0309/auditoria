@@ -13,7 +13,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    <script src="{{ asset('js/laravel.js') }}" defer></script>
+    
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
@@ -32,7 +33,7 @@ footer {
   
 }
 body {
-        background-image: url("http://roles.com.ec/fondos.jpg");
+        background-image: url("http://192.168.1.107/auditoria/public/fondos.jpg");
     }
 
 .form-group input[type="checkbox"] {
@@ -71,7 +72,7 @@ body {
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                 <a class="navbar-brand" href="{{ url('/') }}" style="background-color: #d7f3e3;">
-                   <img src="http://roles.com.ec/logo.jpg" alt="DatamarketingPlus">
+                   <img src="http://192.168.1.107/auditoria/public/logo.jpg" alt="DatamarketingPlus">
                 </a>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -83,27 +84,32 @@ body {
                     <ul class="navbar-nav mr-auto">
 
                         @can('plantillas.index')
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('plantillas.index') }}">Plantillas</a>
+
+                        <li class="nav-item dropdown">
+
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre href="#">Plantillas</a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('plantillas.index') }}">Lista</a>
+                                <a class="dropdown-item" href="{{ route('plantillas.create') }}">Crear</a>
+
+                            </div>
                         </li>
+                        
                         @endcan
 
                         @can('gestion')
                         
                         <li class="nav-item dropdown">
 
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre href="{{ route('gestion') }}">Administracion</a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                              <!--  <a  class="dropdown-item" href="{{ route('gestion') }}">Gestiones</a>-->
-                            
-                                <a class="dropdown-item" href="{{ route('evaluacion.index') }}">Evaluaciones</a>
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre >Treas</a>
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre href="#">Tareas</a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('tarea') }}">Lista</a>
                                 <a class="dropdown-item" href="{{ route('tarea.create') }}">Crear</a>
-                            </div>
+                            
                             </div>
                         </li>
+
+                        
                       
                         @endcan
                         @can('users.index')
@@ -127,7 +133,7 @@ body {
                             </li>
                             <li class="nav-item">
                                 @if (Route::has('register'))
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                   <!-- <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>-->
                                 @endif
                             </li>
                         @else

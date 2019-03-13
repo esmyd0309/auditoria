@@ -32,7 +32,7 @@ Route::put('preguntas/{preguntas}','PreguntaController@update')->name('preguntas
 Route::get('respuestas/create/{id}','RespuestaController@create')->name('respuestas.create');
 Route::post('respuestas/store/{id}','RespuestaController@store')->name('respuestas.store');
 Route::get('respuestas/show/{respuesta}','RespuestaController@show')->name('respuestas.show');
-Route::delete('respuestas/destroy/{respuestas}/{pregunta}','RespuestaController@destroy')->name('respuestas.destroy');
+Route::delete('/respuestas/destroy/{respuestas}/{pregunta}','RespuestaController@destroy')->name('respuestas.destroy');
 
 
 
@@ -41,8 +41,12 @@ Route::get('/gestion/create/{gestion}', 'GestionController@show')->name('gestion
 
 
 Route::get('/evaluacion/{id}','EvaluacionController@create')->name('evaluacion');
+
+Route::get('/evaluacion/{id}/show','EvaluacionController@show')->name('evaluacion.show');
 Route::get('/evaluacion','EvaluacionController@index')->name('evaluacion.index');
 
+/**detalle de las gestiones */
+Route::get('/evaluacion/{id}/detalle','EvaluacionController@detalle')->name('actualicions.detalle');
 
 //Route::resource('evaluacion','EvaluacionController');
 Route::post('/evaluacion/store','EvaluacionController@store')->name('evaluacion.store');
@@ -58,7 +62,7 @@ Route::resource('temp', 'TempgestioneController')->except([
     ]);
 
 Route::get('/temp/vista/{id}', 'TempgestioneController@index')->name('temp.index');
-Route::get('/temp/procesar/{id}/{tarea}','EvaluacionController@proce')->name('evaluacion.proce');
+Route::get('/temp/procesar/{id}/{tarea}/{seg}','EvaluacionController@proce')->name('evaluacion.proce');
 
 
 //Routes
@@ -143,3 +147,15 @@ Route::middleware(['auth'])->group(function(){
             ->middleware('permission:users.edit');
 });
  
+
+Route::get('media','PlantillaController@subir')->name('media.subir');
+
+Route::post('media/store','PlantillaController@ingresa')->name('media.ingresa');
+Route::get('media/{id}','PlantillaController@ver')->name('media.ver');
+
+/*
+Route::post('media', function () {
+    //request()->validate(['file' => 'image']);
+    return request()->file->storeAs('uploads', request()->file->getClientOriginalName());
+});
+*/

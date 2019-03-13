@@ -30,7 +30,7 @@
 
 </div>
 <div class="col-md-2">
-<a href="{{ route('tarea.create') }}" ><img src="http://roles.com.ec/iconos/create.png"></a>
+<a href="{{ route('tarea.create') }}" ><img src="http://192.168.1.107/auditoria/public/iconos/create.png"></a>
         </div>
 <div class="col-md-2">
       
@@ -49,12 +49,13 @@
              <table >
                 <thead class="thead-dark">
                 <th class='text-center'>ID</th>   
-                <th class='text-center'><img src="http://roles.com.ec/iconos/fecha.png"></th>   
-                <th  class='text-center'><img src="http://roles.com.ec/iconos/trabajo.png"></th>
-                <th class='text-center'><img src="http://roles.com.ec/iconos/departamento.png"></th>
-               
-                <th class='text-center'><img src="http://roles.com.ec/iconos/restante.png"> </th>
-                <th class='text-center'><img src="http://roles.com.ec/iconos/status.png"></th>
+                <th class='text-center'><img src="http://192.168.1.107/auditoria/public/iconos/fecha.png"></th>   
+                <th  class='text-center'><img src="http://192.168.1.107/auditoria/public/iconos/trabajo.png"></th>
+                <th class='text-center'><img src="http://192.168.1.107/auditoria/public/iconos/departamento.png"></th>
+                <th class='text-center'>Estado </th>
+                <th class='text-center'><img src="http://192.168.1.107/auditoria/public/iconos/restante.png"> </th>
+
+                <th class='text-center'><img src="http://192.168.1.107/auditoria/public/iconos/status.png"></th>
                 <center><th  class='text-center'>Accion</th></center>
                 </thead>
                 <tbody>
@@ -65,33 +66,34 @@
                     <td class='text-center'><small class="text-muted">{{ $tareas->id }}</small></td>
                     <td class='text-center'><small class="text-muted">{{ $tareas->fecha }}</small></td> 
                     <td class='text-center'><small class="text-muted">{{ $tareas->nombre }}</small></td> 
-                    <td class='text-center'><small class="text-muted">{{ $tareas->departamentos->nombre }}  </small></td> 
+                    <td class='text-center'><small class="text-muted">{{ $tareas->departamentos_id }}  </small></td> 
+                    <td class='text-center'><small class="text-muted">{{ $tareas->estados }}  </small></td> 
                     <td class='text-center'><small class="text-muted">{{ $tareas->cantidad_registros }}</small></td> 
                     @if($tareas->status == 'on')
-                    <td class='text-center'><small class="text-muted"><img src="http://roles.com.ec/iconos/valido.png" width="30" height="30"/></small></td> 
+                    <td class='text-center'><small class="text-muted"><img src="http://192.168.1.107/auditoria/public/iconos/valido.png" width="30" height="30"/></small></td> 
                    
                     @else
-                    <td class='text-center'><small class="text-muted"><img src="http://roles.com.ec/iconos/invalido.png" width="30" height="30"/></small></td>
+                    <td class='text-center'><small class="text-muted"><img src="http://192.168.1.107/auditoria/public/iconos/invalido.png" width="30" height="30"/></small></td>
                     @endif
                    
           
                     <td class='text-center'>
                     @if($tareas->cerrada == 'on')
                     <button type="button" class="btn btn-light">
-                    <a href="{{ route('temp.index', $tareas->id) }}"> <img src="http://roles.com.ec/iconos/trabajar.png" width="30" height="30"></a>  <span class="badge badge-light">{{ $cantidad }}</span>
+                    <a href="{{ route('temp.index', $tareas->id) }}"> <img src="http://192.168.1.107/auditoria/public/iconos/trabajar.png" width="30" height="30"></a>  <span class="badge badge-light">{{ $cantidad }}</span>
                     </button>
                     @else
                   
                     <span class="badge badge-danger">Culminada</span>
                     @endif
-                    <a href="{{ route('tarea.edit', $tareas->id) }}"><img src="http://roles.com.ec/iconos/edit.png" width="30" height="30"></a>
+                    <a href="{{ route('evaluacion.show', $tareas->id) }}"><img src="http://192.168.1.107/auditoria/public/iconos/edit.png" width="30" height="30"></a>
                     </td>
                     <td class='text-center'> 
                         
                         @can('plantillas.destroy')
                             {!! Form::open(['route' => ['tarea.destroy', $tareas->id], 'method' => 'DELETE']) !!}
 
-                                <button type="submit">  <img src="http://roles.com.ec/iconos/delete.png" width="30" height="30"></button>
+                                <button type="submit" onclick="return confirm('¿ ESTAS SEGURO QUE DESEAS ELIMINAR ?')">  <img src="http://192.168.1.107/auditoria/public/iconos/delete.png" width="30" height="30"></button>
                             {!! Form::close() !!}
   
                         @endcan

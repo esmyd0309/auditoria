@@ -52,7 +52,7 @@
                                    {!! Form::open(['route' => ['respuestas.destroy', $respuestas->id, $preguntas->id],
                                        'method' => 'DELETE']) !!}
 
-                                       <button class="btn btn-sm btn-danger">Eliminar
+                                       <button class="btn btn-sm btn-danger" onclick="return confirm('¿ ESTAS SEGURO QUE DESEAS ELIMINAR ?')">Eliminar
                                           
                                        </button>
                                    {!! Form::close() !!}

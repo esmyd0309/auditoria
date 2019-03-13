@@ -7,14 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Estado extends Model
 {
 
-    protected $table = 'estados';
-    protected $primaryKey = 'id';
+    protected $connection = 'asterisk';
+    protected $table = 'vicidial_statuses';
 
-    protected $fillable = [
-        'nombre', 'status', ];
-
+    
     public function tarea()
     {
-        return $this->belongsTo('App\Tarea', 'departamentos_id');
+        return $this->belongsTo('App\Tarea', 'tareas_id');
     }
 }

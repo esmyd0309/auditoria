@@ -58,10 +58,10 @@ return [
 
         'asterisk'  => [
             'driver'     => 'mysql',
-            'host'       => env('COMMENTS_HOST', 'localhost'),
-            'database'   => env('COMMENTS_DATABASE', 'forge'),
-            'username'   => env('COMMENTS_USERNAME', 'forge'),
-            'password'   => env('COMMETNS_PASSWORD', ''),
+            'host'       => env('COMMENTS_HOST', '192.168.1.75'),
+            'database'   => env('COMMENTS_DATABASE', 'asterisk'),
+            'username'   => env('COMMENTS_USERNAME', 'sistema'),
+            'password'   => env('COMMETNS_PASSWORD', '123456'),
             'charset'    => 'utf8',
             'collation'  => 'utf8_unicode_ci',
             'prefix'     => '',
