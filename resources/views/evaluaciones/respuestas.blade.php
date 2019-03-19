@@ -60,7 +60,7 @@
                                         </div>
                                         <div class="col-md-8">
                                             <label for="exampleFormControlFile1"><strong>Comentario</strong></label>
-                                                <textarea name="comentario[]" rows="2" cols="10" class="form-control{{ $errors->has('comentario') ? ' is-invalid' : ''  }}" autofocus ></textarea>
+                                                <textarea name="comentario[]" rows="2" cols="10" class="form-control{{ $errors->has('comentario') ? ' is-invalid' : ''  }}" autofocus required></textarea>
                                                 @if ($errors->has('comentario'))
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $errors->first('comentario') }}</strong>
@@ -98,7 +98,7 @@
                            <label for="" class="btn btn-sm">{{ $audioxs->start_time }}</label> 
                             
                     
-                            <input name="file" type="hidden" value=" {{ $audioxs->location }} ">
+                            <input name="file" type="hidden" value=" {{ $audioxs->location }} " >
                     @endforeach 
                     <div class="row justify-content-center">
                   

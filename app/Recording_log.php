@@ -8,10 +8,14 @@ class Recording_log extends Model
 {
     protected $connection = 'asterisk';
     protected $table = 'recording_log';
-    protected $primaryKey = 'recording_id';//
+    protected $primaryKey = 'recording_id';
 
-    protected $fillable = [
-        'uniqueid', 
-    ];
+    
+
+
+    public function logs()
+    {
+        return $this->hasMany('App\Vicidial_log','uniqueid');
+    }
 
 }

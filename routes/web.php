@@ -48,6 +48,10 @@ Route::get('/evaluacion','EvaluacionController@index')->name('evaluacion.index')
 /**detalle de las gestiones */
 Route::get('/evaluacion/{id}/detalle','EvaluacionController@detalle')->name('actualicions.detalle');
 
+/**descargar destalle individual */
+Route::get('/evaluacion/{id}/descargar','EvaluacionController@descargar')->name('actualicions.descargar');
+
+
 //Route::resource('evaluacion','EvaluacionController');
 Route::post('/evaluacion/store','EvaluacionController@store')->name('evaluacion.store');
 Route::get('/menu','HomeController@menu')->name('menu');
@@ -62,7 +66,7 @@ Route::resource('temp', 'TempgestioneController')->except([
     ]);
 
 Route::get('/temp/vista/{id}', 'TempgestioneController@index')->name('temp.index');
-Route::get('/temp/procesar/{id}/{tarea}/{seg}','EvaluacionController@proce')->name('evaluacion.proce');
+Route::get('/temp/procesar/{id}/{tarea}/{seg}/{path}','EvaluacionController@proce')->name('evaluacion.proce');
 
 
 //Routes

@@ -10,7 +10,7 @@ class Evaluacion extends Model
     protected $table = 'evaluacions';
 
     
-    protected $fillable = ['users_id', 'gestions_id','plantillas_id','tarea_id' ,'hora','fecha','grabacion', 'comentario', 'cantidad_evaluar','calificacion','agente',];
+    protected $fillable = ['users_id', 'gestions_id','plantillas_id','respuesta_id','tarea_id' ,'hora','fecha','grabacion', 'comentario', 'cantidad_evaluar','calificacion','agente','vicidial_id',];
    
 
   
@@ -41,9 +41,12 @@ class Evaluacion extends Model
     }
 
 
-    public function respuestas()
+ 
+    
+
+    public function audiox()
     {
-        return $this->belongsTo('App\PreguntaRespuesta','evaluacions_id');
+        return $this->belongsTo('App\Recording_log','lead_id');
     }
 
 

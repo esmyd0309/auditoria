@@ -60,11 +60,16 @@
                     <td class='text-center'><small class="text-muted">{{ $gestiontms->cabecera->first_name }}</small></td>
                     <td class='text-center'><small class="text-muted">{{ $gestiontms->call_date }}</small></td>
                     <td class='text-center'><small class="text-muted">{{ $gestiontms->length_in_sec }}</small></td>
-                    
+                   <!-- <td class='text-center'><audio controls="" preload="none"> 
+                                <source src="{{ $gestiontms->location }}" type="audio/mp3">
+                                    No es compatible con la reproducción de audio del navegador
+                                 
+                            </audio>-->
+                    </td>
                     <td class='text-center'>
               
 
-                  <a href="{{ route('evaluacion.proce', [$gestiontms->lead_id,$idtarea,$gestiontms->length_in_sec]) }}" class="btn btn-success btn-xs">Evaluar</a>
+                  <a href="{{ route('evaluacion.proce', [$gestiontms->lead_id,$idtarea,$gestiontms->length_in_sec,$gestiontms->uniqueid]) }}" class="btn btn-success btn-sm">Evaluar</a>
                 </tr>
              
    
@@ -81,7 +86,7 @@
                
              </table>
 
-          
+             
                
                 </div>
                

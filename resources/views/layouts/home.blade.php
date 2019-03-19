@@ -59,16 +59,16 @@
                         @endcan
 
                           @can('gestion')
-                        
-                        <li class="nav-item dropdown">
+                          <li class="nav-item dropdown">
 
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre href="{{ route('gestion') }}">Gestiones</a>
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre href="#">Tareas</a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a  class="dropdown-item" href="{{ route('gestion') }}">Gestiones</a>
-                            
-                                <a class="dropdown-item" href="{{ route('evaluacion.index') }}">Evaluaciones</a>
+                                <a class="dropdown-item" href="{{ route('tarea') }}">Lista</a>
+                                <a class="dropdown-item" href="{{ route('tarea.create') }}">Crear</a>
+
                             </div>
-                        </li>
+                            </li>
+
                       
                         @endcan
                         @can('users.index')

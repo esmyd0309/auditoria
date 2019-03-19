@@ -15,4 +15,9 @@ class Vicidial_log extends Model
         return $this->belongsTo('App\Vicidial_list','lead_id');
     }
 
+    public function audio()
+    {
+        return $this->belongsTo('App\Recording_log','recording_id','vicidial_id');
+    }
+
 }

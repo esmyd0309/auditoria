@@ -13,6 +13,7 @@ use App\Vicidial_log;
 use App\PreguntaRespuesta;
 use App\Recording_log;
 use Illuminate\Http\Request;
+use PDO;
 use lists;
 use DB;
 use Lang;
@@ -90,9 +91,9 @@ class EvaluacionController extends Controller
         return view('evaluaciones.create', compact('namegestion','pregunta'));
     }
 
-    public function proce(Request $request,$id,$tarea,$seg)
+    public function proce(Request $request,$id,$tarea,$seg,$path)
     { 
-      
+       $uniqueid =$path;
        $seg=$seg;
         $gestion_id = $id;//id de la gestion
       //dd($gestion_id);
@@ -126,20 +127,22 @@ class EvaluacionController extends Controller
   
         }
   
-
-
+        
+    
    /**
     * traer los datos de la grabacion
     */
-
+ 
         $audios = DB::connection('asterisk')->select("SELECT uniqueid FROM vicidial_log WHERE lead_id='$gestion_id' and status='$plantilla->estados'  and length_in_sec='$seg'");
+        
+        //dd($audios);
         foreach ($audios as  $audioss) {
             
             $location=$audioss->uniqueid;
             $audiox = DB::connection('asterisk')->select("SELECT location,start_time FROM recording_log WHERE vicidial_id='$location' and lead_id='$gestion_id'");
             
     }
-   
+  
 
       return view('evaluaciones.respuestas',compact('plantilla_id','gestion_id','tarea','preguntas_id','repuestas','preguntas','plantillas','audiox','seg'));
       
@@ -158,10 +161,7 @@ class EvaluacionController extends Controller
     public function store(Request $request)
     {
 
-        /*$validatedData = $request->validate([
-            'comentario' => 'required',
         
-        ]);*/
         $pregunta_id                = $request->input('pregunta_id');//al igual de la plantilla 
         $respuesta_id               = $request->input('respuesta_id');//guardo lo que me viene del array del select
         $plantilla_id               = $request->input('plantilla_id');//obtengo el id de la plantilla pasado desde el controlador creeate a la vista y mediante la misma la paso aqui con la etiqueta input <input name="plantilla_id" type="hidden" value="{{$plantilla_id}}">
@@ -171,7 +171,7 @@ class EvaluacionController extends Controller
         $maxima_calificacion        = $request->input('maxima_calificacion');
         
         $seg = $request->input('seg');
-        //dd($seg);
+        //dd($request);
          $user = \Auth::user()->id;
 
        
@@ -219,6 +219,7 @@ class EvaluacionController extends Controller
            // dd($respuestadetalle);
             foreach ($respuestadetalle as  $respuestadetalles) {
                 $respuestax = $respuestadetalles->respuesta;
+                
                // $comentario = $respuestadetalles->comentario;
                 $valor_1=$respuestadetalles->valor_1;
                 
@@ -263,7 +264,7 @@ class EvaluacionController extends Controller
 
             
              /*** buscar el agente que gestiono esa llamada */
-             $userx = DB::connection('asterisk')->select("SELECT user
+             $userx = DB::connection('asterisk')->select("SELECT user,vicidial_id
                                                             FROM recording_log 
                                                                 WHERE vicidial_id='$location' 
                                                                 and lead_id='$gestion_id'");
@@ -271,12 +272,29 @@ class EvaluacionController extends Controller
                 foreach ($userx as  $userxs) {
             
             $agente =  $userxs->user;
+            $vicidial_id =  $userxs->vicidial_id;
                 }
             /*** guaramos en la bd el agente gestionado */
             $evaluacion->agente =   $agente;
+            $evaluacion->vicidial_id =   $vicidial_id;
+
+                        $evaluacion->telefono    =   $telefono;
+                        $evaluacion->grupo       =   $grupo;
+                        $evaluacion->estado      =   $estado;
+                        $evaluacion->seg         =   $seg;
+                        $evaluacion->cedula      =   $cedula;
+                        $evaluacion->nombre      =   $nombre;
+                        $evaluacion->address1    =   $address1;
+                        $evaluacion->address2    =   $address2;
+                        $evaluacion->address3    =   $address3;
+                        $evaluacion->city        =   $city;
+                        $evaluacion->province    =   $province;
+                      
+
+                        $evaluacion->save();
 /************************************************************************************************************************** */
-                
-            $evaluacion->save();
+               // dd($evaluacion);
+           
 
 
 
@@ -307,20 +325,26 @@ for ($i=0;$i<count($respuesta_id);$i++) //recorro el array que me viene del sele
                                      $preguntarespuesta->calificacion    =  $valors->peso;
                                 }
                         }
+
+
+                        /**detalle del cliente del predictivo */
                         $preguntarespuesta->agente      =   $agente;
                         $preguntarespuesta->telefono    =   $telefono;
                         $preguntarespuesta->grupo       =   $grupo;
                         $preguntarespuesta->estado      =   $estado;
                         $preguntarespuesta->seg         =   $seg;
-
-                        /**detalle del cliente del predictivo */
                         $preguntarespuesta->cedula      =   $cedula;
                         $preguntarespuesta->nombre      =   $nombre;
                         $preguntarespuesta->address1    =   $address1;
                         $preguntarespuesta->address2    =   $address2;
                         $preguntarespuesta->city        =   $city;
                         $preguntarespuesta->province    =   $province;
-                        $preguntarespuesta->grabacion    =   $evaluacion->grabacion;
+                        $preguntarespuesta->grabacion    =  $evaluacion->grabacion;
+
+
+                        
+
+
 
                         /**detalle de las preguntas */
                         $preguntarespuesta->pregunta    =   $pregunta;
@@ -330,9 +354,8 @@ for ($i=0;$i<count($respuesta_id);$i++) //recorro el array que me viene del sele
 
                         /**detalle de las respuestas de esas preguntas  */
                         $preguntarespuesta->respuesta  =   $respuestax;
-                      //  $preguntarespuesta->comentario      =   $comentario;
                         $preguntarespuesta->valor_1         =   $valor_1;
-                       // dd($preguntarespuesta);
+                        $preguntarespuesta->tarea_id         =   $tareas_id;
                         $preguntarespuesta->save();
                     }
                     
@@ -409,7 +432,7 @@ for ($i=0;$i<count($respuesta_id);$i++) //recorro el array que me viene del sele
     {
 
       
-        $gestiontm=Evaluacion::orderBy('id', 'DESC')->where('tarea_id',$id)->get();
+        $gestiontm=Evaluacion::orderBy('id', 'DESC')->where('tarea_id',$id)->paginate(5);
      
      
        //  dd($gestiontm);
@@ -430,7 +453,22 @@ for ($i=0;$i<count($respuesta_id);$i++) //recorro el array que me viene del sele
         $gestiontm=PreguntaRespuesta::where('evaluacions_id',$id)->get();
         $evaluacion=Evaluacion::where('id',$id)->get();
      
-        // dd($evaluacion);
+         //dd($gestiontmx);
+        return view('evaluaciones.detalle', compact('gestiontm','evaluacion'));
+
+    }
+
+
+   
+    public function descargar($id)
+    {
+
+        dd($id);
+      
+        $gestiontm=PreguntaRespuesta::where('evaluacions_id',$id)->get();
+        $evaluacion=Evaluacion::where('id',$id)->get();
+     
+         //dd($gestiontmx);
         return view('evaluaciones.detalle', compact('gestiontm','evaluacion'));
 
     }

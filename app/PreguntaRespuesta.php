@@ -14,10 +14,7 @@ class PreguntaRespuesta extends Model
     ];
 
    
-    public function evaluaciones()
-    {
-        return $this->belongsTo('App\Evaluacion');
-    }
+   
 
     public function pregunta()
     {
