@@ -20,7 +20,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <a  href="{{ url('/plantillas') }}" ><img class="card-img-top" src="http://192.168.1.107/auditoria/public/gestiones.png" width="100px" height="100px" alt="Card image cap"></a>
-                                    <h5 class="card-title"> <b> Gestiones</b>  </h5><br>
+                                    <h5 class="card-title"> <b> Plantillas</b>  </h5><br>
                                 </div>
                             </div>
                         </div>
@@ -29,8 +29,8 @@
                         <div class="col-sm-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <a  href="{{ url('/plantillas') }}" ><img class="card-img-top" src="http://192.168.1.107/auditoria/public/indicadores.png" width="100px" height="100px" alt="Card image cap"></a>
-                                            <h5 class="card-title"> <b> Indicadores</b>  </h5><br>
+                                    <a  href="{{ url('tarea') }}" ><img class="card-img-top" src="http://192.168.1.107/auditoria/public/indicadores.png" width="100px" height="100px" alt="Card image cap"></a>
+                                            <h5 class="card-title"> <b> Tareas</b>  </h5><br>
                                 </div>
                             </div>
                         </div>

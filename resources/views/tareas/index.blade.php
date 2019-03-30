@@ -119,8 +119,10 @@
                
                 </div>
             </div>
-        </div>
+        </div><br>
+        <a class="btn btn-sm btn-success" href="{{ route('home') }}">Volver</a>
     </div>
+  
 </div>
 
 @endsection

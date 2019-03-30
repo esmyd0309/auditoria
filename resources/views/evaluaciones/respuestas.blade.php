@@ -106,7 +106,8 @@
                    
                     {{ form::submit('Guardar', ['class' => 'btn btn-sm btn-primary']) }}
                     |||
-    <a class="btn btn-sm btn-success" href="{{ route('tarea') }}">Volver</a>
+                
+    <a class="btn btn-sm btn-success" href="{{ URL::previous() }}">Volver</a>
                         </div>
                         
     

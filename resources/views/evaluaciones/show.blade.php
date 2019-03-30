@@ -24,7 +24,7 @@
                 </div>
             </div>                    
                     
-             
+            <a class="btn btn-sm btn-success" href="{{ URL::previous() }}">Volver</a>
          
         </div>
     </div>

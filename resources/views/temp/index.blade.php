@@ -90,8 +90,8 @@
                
                 </div>
                
-            </div>
-            <a href="{{ route('tarea') }}" class="btn btn-primary btn-xs">Volver</a>
+         <br>
+            <a href="{{ route('tarea') }}" class="btn btn-sm btn-success">Volver</a>
         </div>
     </div>
 </div>
