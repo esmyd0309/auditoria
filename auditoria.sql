@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `estados` (
 CREATE TABLE IF NOT EXISTS `evaluacions` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `users_id` int(10) unsigned NOT NULL,
-  `gestions_id` int(10) unsigned NOT NULL,
+  `gestions_id` int(11) NOT NULL,
   `plantillas_id` int(10) unsigned NOT NULL,
   `tarea_id` int(10) unsigned NOT NULL,
   `hora` time DEFAULT NULL,
@@ -65,6 +65,7 @@ CREATE TABLE IF NOT EXISTS `evaluacions` (
   `province` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `grabacion` varchar(600) COLLATE utf8_unicode_ci DEFAULT NULL,
   `vicidial_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cerrado` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `evaluacions_users_id_foreign` (`users_id`),
   KEY `evaluacions_tarea_id_foreign` (`tarea_id`),
@@ -73,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `evaluacions` (
   CONSTRAINT `evaluacions_plantillas_id_foreign` FOREIGN KEY (`plantillas_id`) REFERENCES `plantillas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `evaluacions_tarea_id_foreign` FOREIGN KEY (`tarea_id`) REFERENCES `tareas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `evaluacions_users_id_foreign` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=167 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- La exportación de datos fue deseleccionada.
 -- Volcando estructura para tabla auditoria.gestions
@@ -110,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- La exportación de datos fue deseleccionada.
 -- Volcando estructura para tabla auditoria.password_resets
@@ -147,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `permission_role` (
   KEY `permission_role_role_id_index` (`role_id`),
   CONSTRAINT `permission_role_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,
   CONSTRAINT `permission_role_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- La exportación de datos fue deseleccionada.
 -- Volcando estructura para tabla auditoria.permission_user
@@ -162,7 +163,7 @@ CREATE TABLE IF NOT EXISTS `permission_user` (
   KEY `permission_user_user_id_index` (`user_id`),
   CONSTRAINT `permission_user_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,
   CONSTRAINT `permission_user_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- La exportación de datos fue deseleccionada.
 -- Volcando estructura para tabla auditoria.plantillas
@@ -181,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `plantillas` (
   PRIMARY KEY (`id`),
   KEY `plantillas_users_id_foreign` (`users_id`),
   CONSTRAINT `plantillas_users_id_foreign` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- La exportación de datos fue deseleccionada.
 -- Volcando estructura para tabla auditoria.preguntas
@@ -200,7 +201,7 @@ CREATE TABLE IF NOT EXISTS `preguntas` (
   PRIMARY KEY (`id`),
   KEY `preguntas_plantillas_id_foreign` (`plantillas_id`),
   CONSTRAINT `preguntas_plantillas_id_foreign` FOREIGN KEY (`plantillas_id`) REFERENCES `plantillas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- La exportación de datos fue deseleccionada.
 -- Volcando estructura para tabla auditoria.pregunts_respuests
@@ -241,7 +242,7 @@ CREATE TABLE IF NOT EXISTS `pregunts_respuests` (
   CONSTRAINT `pregunts_respuests_evaluacions_id_foreign` FOREIGN KEY (`evaluacions_id`) REFERENCES `evaluacions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `pregunts_respuests_preguntas_id_foreign` FOREIGN KEY (`preguntas_id`) REFERENCES `preguntas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `pregunts_respuests_respuestas_id_foreign` FOREIGN KEY (`respuestas_id`) REFERENCES `respuestas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- La exportación de datos fue deseleccionada.
 -- Volcando estructura para tabla auditoria.reportedetalle
@@ -288,7 +289,7 @@ CREATE TABLE IF NOT EXISTS `respuestas` (
   PRIMARY KEY (`id`),
   KEY `respuestas_preguntas_id_foreign` (`preguntas_id`),
   CONSTRAINT `respuestas_preguntas_id_foreign` FOREIGN KEY (`preguntas_id`) REFERENCES `preguntas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- La exportación de datos fue deseleccionada.
 -- Volcando estructura para tabla auditoria.roles
@@ -303,7 +304,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `roles_name_unique` (`name`),
   UNIQUE KEY `roles_slug_unique` (`slug`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- La exportación de datos fue deseleccionada.
 -- Volcando estructura para tabla auditoria.role_user
@@ -318,7 +319,7 @@ CREATE TABLE IF NOT EXISTS `role_user` (
   KEY `role_user_user_id_index` (`user_id`),
   CONSTRAINT `role_user_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE,
   CONSTRAINT `role_user_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- La exportación de datos fue deseleccionada.
 -- Volcando estructura para tabla auditoria.tareas
@@ -344,7 +345,7 @@ CREATE TABLE IF NOT EXISTS `tareas` (
   KEY `tareas_plantillas_id_foreign` (`plantillas_id`),
   CONSTRAINT `tareas_plantillas_id_foreign` FOREIGN KEY (`plantillas_id`) REFERENCES `plantillas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tareas_users_id_foreign` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- La exportación de datos fue deseleccionada.
 -- Volcando estructura para tabla auditoria.tempgestiones
@@ -369,6 +370,17 @@ CREATE TABLE IF NOT EXISTS `tempgestiones` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- La exportación de datos fue deseleccionada.
+-- Volcando estructura para tabla auditoria.temporals
+CREATE TABLE IF NOT EXISTS `temporals` (
+  `gestion_id` int(50) DEFAULT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `tarea_id` int(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=latin1;
+
+-- La exportación de datos fue deseleccionada.
 -- Volcando estructura para tabla auditoria.users
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -381,7 +393,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- La exportación de datos fue deseleccionada.
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

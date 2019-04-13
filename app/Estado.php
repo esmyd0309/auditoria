@@ -8,7 +8,7 @@ class Estado extends Model
 {
 
     protected $connection = 'asterisk';
-    protected $table = 'vicidial_statuses';
+    protected $table = 'vicidial_campaign_statuses';
 
     
     public function tarea()

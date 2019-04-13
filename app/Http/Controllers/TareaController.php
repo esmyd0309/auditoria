@@ -6,6 +6,7 @@ use App\Tarea;
 use App\Departamento;
 use Illuminate\Http\Request;
 use App\Tempgestione;
+use App\Evaluacion;
 use App\Estado;
 use App\Gestion;
 use App\Plantilla;
@@ -15,6 +16,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Carbon\Carbon;
 use DB;
+use App\Temporal;
 class TareaController extends Controller
 {
     public function __construct()
@@ -51,8 +53,13 @@ class TareaController extends Controller
         $joffrey = $death->find(1);
         //dd($joffrey);
       
-        $gestionestem = Tempgestione::all();
-        
+
+        $gestionestem = DB::table('evaluacions')
+                     ->select(DB::raw('count(gestions_id) as gestion, tarea_id'))
+                     ->groupBy('tarea_id')
+                     ->get();
+      
+      //  dd($gestionestem);
         $cantidad = Tempgestione::where('status', '=', 'on')->count();
        
         
@@ -71,7 +78,7 @@ class TareaController extends Controller
     {
 
         $departamento = Departamento::all();
-        $estado = Estado::where('selectable','=','Y')->get();
+        $estado = Estado::distinct('status')->get();
         //dd($estado);
         $plantilla = Plantilla::all();
         return view('tareas.create',compact('departamento','estado','plantilla'));
@@ -126,6 +133,11 @@ class TareaController extends Controller
         {*/
             $tarea->save();
 
+            $temporal = new Temporal();
+            $temporal->gestion_id = 123456;
+            $temporal->tarea_id = $tarea->id;
+            $temporal->save();
+           
                ///validar que solo se guarde una cedula por agente
               
                
@@ -155,7 +167,10 @@ class TareaController extends Controller
                     $temgestion->status = 'on';
 
                         $temgestion->save();
-                   
+                          /**ingresar id de la gestion para el temporal  */
+
+        
+                         
                 }
             }
               return redirect()->route('tarea')

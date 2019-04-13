@@ -11,8 +11,17 @@ use App\Asterisk;
 use App\Vicidial_list;
 use App\Recording_log;
 use App\Vicidial_log;
+use App\Temporal;
+use Datetime;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
+
+
+use Illuminate\Database\Query\Builder;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 class TempgestioneController extends Controller
 {
     /**
@@ -24,7 +33,8 @@ class TempgestioneController extends Controller
     {
        $idtarea = $id;
 
-       $evaluaciones = DB::table('evaluacions')->select('gestions_id')->where('tarea_id',$idtarea)->get();
+       $evaluaciones = DB::table('evaluacions')->select('gestions_id')->where('tarea_id',$idtarea)->first();
+       $evaluacionesx = DB::table('evaluacions')->select('gestions_id')->where('tarea_id',$idtarea)->get();
    
 
 
@@ -41,31 +51,79 @@ class TempgestioneController extends Controller
        $estados =$estado->estados;
      }
   
-    //** verificar si ya esta la ruta del audio */
-       
-   /* foreach ($evaluaciones as  $evaluacionesx) {
-        $gestions_id =$evaluacionesx->gestions_id;
-        $location = DB::connection('asterisk')->select("SELECT uniqueid FROM vicidial_log WHERE lead_id='$gestions_id'");
-      
-      }
+
      
-      foreach ($location as  $locationx) {
-       
-        
-        $audiox = DB::connection('asterisk')->select("SELECT location FROM recording_log WHERE vicidial_id=$locationx->uniqueid");
-       
-   
-        dd($audiox);
-      }
-      */
+ 
     
+    /**traer los id_gestion que ya se encuentran trabajados */
+        $gestionados = DB::table('evaluacions')
+                     ->select(DB::raw('gestions_id'))
+                     ->where('tarea_id',$idtarea)
+                     ->get();
+
+                     foreach ($gestionados as  $gestionadoss) {
+                      $gestions_id =$gestionadoss->gestions_id;
+                    }
+
+                    /**no traer los id que ya se estan trabajando por los auditores */
+                    $temporal = DB::table('temporals')
+                    ->select(DB::raw('gestion_id'))
+                    ->where('tarea_id',$idtarea)
+                    ->get();
+
+                    foreach ($temporal as  $temporals) {
+                     $gestion_id =$temporals->gestion_id;
+                     
+                   }
 
 
-      if ($evaluaciones!=''){
-        $gestiontm = Vicidial_log::where('user_group',$grupos)->where('status',$estados)->orderBy('uniqueid', 'desc')
+                   
+$date = new DateTime(); // Por defecto la hora actual
+$call_date = $date->modify('-20 minutes');
+//dd($evaluaciones);
+
+/***traemos los datos del predictivo segun el id de la plantilla y sacamos los que ya trabajamos.  */
+      if ($evaluaciones==null){
+
+        
+        $gestiontm = Vicidial_log::where('user_group',$grupos)->where('status',$estados)->where('call_date','<',$call_date)->orderBy('uniqueid', 'desc')
         ->limit(20)
         ->get();
-         //dd($gestiontm);
+         
+        
+
+
+
+       
+     return view('temp.index', compact('gestiontm','idtarea','evaluaciones','audiox'));
+     
+      }
+
+      
+
+
+        $gestiontm = Vicidial_log::where('user_group',$grupos)
+        ->where('status',$estados)
+        ->where('lead_id','!=',$gestions_id)
+        ->where('lead_id','!=',$gestion_id)
+        ->where('call_date','<',$call_date)
+        ->orderBy('uniqueid', 'desc')
+        ->limit(20)
+        ->get();
+        // dd($gestiontm);
+
+               /**
+    * traer los datos de la grabacion
+    */
+ 
+    
+    foreach ($gestiontm as  $gestiontms) {
+        
+      $location=$gestiontms->uniqueid;
+      $audiox = DB::connection('asterisk')->select("SELECT location,start_time FROM recording_log WHERE vicidial_id='$location' and lead_id='$gestion_id'");
+      
+}
+
 
         /*$gestiontm = Vicidial_log::join('recording_log', 'vicidial_log.uniqueid', '=', 'recording_log.vicidial_id')
         ->select('vicidial_log.*', 'recording_log.vicidial_id','recording_log.location')->where('status',$estados)->where('recording_log.location','<>','')->orderBy('uniqueid', 'desc')
@@ -75,17 +133,7 @@ class TempgestioneController extends Controller
         //dd($gestiontm);
 
 
-     return view('temp.index', compact('gestiontm','idtarea','evaluaciones'));
-      }
-
-      
-           $gestiontm = Vicidial_log::where('user_group',$grupos)->where('status',$estados)->orderBy('uniqueid', 'desc')
-           ->limit(20)
-           ->get();
-            
-          // dd($gestiontm);
-          
-        return view('temp.index', compact('gestiontm','idtarea','evaluaciones'));
+     return view('temp.index', compact('gestiontm','idtarea','evaluaciones','gestionados','audiox'));
     }
 
     /**

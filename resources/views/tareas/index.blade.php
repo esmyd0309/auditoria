@@ -68,25 +68,22 @@
                     <td class='text-center'><small class="text-muted">{{ $tareas->nombre }}</small></td> 
                     <td class='text-center'><small class="text-muted">{{ $tareas->departamentos_id }}  </small></td> 
                     <td class='text-center'><small class="text-muted">{{ $tareas->estados }}  </small></td> 
-                    <td class='text-center'><small class="text-muted">{{ $tareas->cantidad_registros }}</small></td> 
-                    @if($tareas->status == 'on')
-                    <td class='text-center'><small class="text-muted"><img src="http://192.168.1.107/auditoria/public/iconos/valido.png" width="30" height="30"/></small></td> 
-                   
-                    @else
-                    <td class='text-center'><small class="text-muted"><img src="http://192.168.1.107/auditoria/public/iconos/invalido.png" width="30" height="30"/></small></td>
-                    @endif
-                   
+                    <td class='text-center'><small class="text-muted ">{{ $tareas->cantidad_registros }}</small></td> 
+              
           
                     <td class='text-center'>
                     @if($tareas->cerrada == 'on')
                     <button type="button" class="btn btn-light">
-                    <a href="{{ route('temp.index', $tareas->id) }}"> <img src="http://192.168.1.107/auditoria/public/iconos/trabajar.png" width="30" height="30"></a>  <span class="badge badge-light">{{ $cantidad }}</span>
+                   
+                        
+                    <a href="{{ route('temp.index', $tareas->id) }}"> <img src="http://192.168.1.107/auditoria/public/iconos/trabajar.png" width="30" height="30">  <span class="badge badge-light">@foreach ($gestionestem->where('tarea_id',$tareas->id) as $gestionestems) {{ $gestionestems->gestion }}@endforeach</span></a> 
                     </button>
+                
                     @else
                   
-                    <span class="badge badge-danger">Culminada</span>
+                    <span class="badge badge-danger">Culminada</span>@foreach ($gestionestem->where('tarea_id',$tareas->id) as $gestionestems) {{ $gestionestems->gestion }}@endforeach
                     @endif
-                    <a href="{{ route('evaluacion.show', $tareas->id) }}"><img src="http://192.168.1.107/auditoria/public/iconos/edit.png" width="30" height="30"></a>
+                    </td> <td class='text-center'> <a href="{{ route('evaluacion.show', $tareas->id) }}"><img src="http://192.168.1.107/auditoria/public/iconos/edit.png" width="30" height="30"></a>
                     </td>
                     <td class='text-center'> 
                         

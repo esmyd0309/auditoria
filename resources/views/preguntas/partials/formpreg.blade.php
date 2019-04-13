@@ -11,7 +11,7 @@
 @endif
 </div>
 
-<div class="form-group">
+<!--<div class="form-group">
     {{ form::label('descripcion', ' Descripción') }}
     {{ form::text('descripcion', null, ['class' => 'form-control ']) }}
     @if ($errors->has('descripcion'))
@@ -19,11 +19,11 @@
         <strong>{{ $errors->first('descripcion') }}</strong>
     </span>
 @endif
-</div>
+</div>-->
 
 
 
-<div class="form-group">
+<!--<div class="form-group">
     {{ form::label('peso', 'Peso') }}
     {{ form::number('peso', null, ['class' => 'form-control']) }}
     @if ($errors->has('peso'))
@@ -31,7 +31,7 @@
         <strong>{{ $errors->first('peso') }}</strong>
     </span>
 @endif
-</div>
+</div>-->
 
 
 <div class="form-group">
@@ -49,7 +49,7 @@
 </div>
 
 <div class="form-group">
-    {{ form::submit('Guardar', ['class' => 'btn btn-sm btn-primary']) }}
+    {{ form::submit('Guardar', ['class' => 'btn btn-sm btn-primary']) }}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-sm btn-success" href="{{ URL::previous() }}">Volver</a>
 </div>
 
 

@@ -61,9 +61,9 @@ class PreguntaController extends Controller
 
         $validatedData = $request->validate([
             'pregunta' => 'required',
-            'peso' => 'required',
+            
             'tipo' => 'required',
-            'descripcion' => 'required',
+         
         ]);
                
             $now=Carbon::now();

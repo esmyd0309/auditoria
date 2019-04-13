@@ -12,6 +12,7 @@ use App\Tarea;
 use App\Vicidial_log;
 use App\PreguntaRespuesta;
 use App\Recording_log;
+use App\Temporal;
 use Illuminate\Http\Request;
 use PDO;
 use lists;
@@ -96,8 +97,16 @@ class EvaluacionController extends Controller
        $uniqueid =$path;
        $seg=$seg;
         $gestion_id = $id;//id de la gestion
-      //dd($gestion_id);
-      //$plantillaALL = Tempgestione::where('gestions_id',$gestion_id)->get();///consultar datos de la gestion
+     
+
+
+        /**ingresar id de la gestion para el temporal  */
+
+        $temporal = new Temporal();
+        $temporal->gestion_id = $gestion_id;
+        $temporal->tarea_id = $tarea;
+        $temporal->save();
+
       $plantillaALL = Tarea::where('id',$tarea)->get();///consultar datos de la gestion
 
   
@@ -389,10 +398,14 @@ for ($i=0;$i<count($respuesta_id);$i++) //recorro el array que me viene del sele
       
             $canTarea   =   Tarea::select('cantidad_registros')->Where('id',$evaluacion->tarea_id)->get();//consulto la cantidad de registro que fueron ingresado al crear la tarea
        
+            $cantidaevaluciones    =   Evaluacion::Where('tarea_id',$evaluacion->tarea_id)->count(); 
+            
+
+
             foreach ($canTarea  as  $canTareax ) {//realizo el bucle para obtener el campo solicitado
                 $cantidadregistros = $canTareax->cantidad_registros;
 
-                if($cantidadregistros == $canTemp ){//valido si la cantidad de registros que esta actualmente en mi tarea es igual a la gestiones cerradas en mi tabla temporal
+                if($cantidadregistros <= $cantidaevaluciones ){//valido si la cantidad de registros que esta actualmente en mi tarea es igual a la gestiones cerradas en mi tabla temporal
                     $gestiontm=Tarea::where('id',$evaluacion->tarea_id)
                                     ->update(['cerrada' => 'of']);//si se cumple realizo un update a mi campo cerrada de la tabla tareas.
                 }
@@ -414,6 +427,9 @@ for ($i=0;$i<count($respuesta_id);$i++) //recorro el array que me viene del sele
 
             }//si no se cumple solo lo dejo gestionar 
 
+
+            $deletedRows = Temporal::where('gestion_id', $gestion_id)->delete();
+//dd($deletedRows);
             return redirect()->route('temp.index', $evaluacion->tarea_id)->with([
                 'info' => 'La Gestion fue guardada Correctamente!!'
             ]);
@@ -463,15 +479,28 @@ for ($i=0;$i<count($respuesta_id);$i++) //recorro el array que me viene del sele
     public function descargar($id)
     {
 
-        dd($id);
+        
       
-        $gestiontm=PreguntaRespuesta::where('evaluacions_id',$id)->get();
+        //$gestiontm=PreguntaRespuesta::where('evaluacions_id',$id)->get();
         $evaluacion=Evaluacion::where('id',$id)->get();
      
-         //dd($gestiontmx);
+         dd($evaluacion);
         return view('evaluaciones.detalle', compact('gestiontm','evaluacion'));
 
     }
+
+
+    public function temporal($idgestion,$idtarea)
+    {
+       // dd($idgestion);
+/**eliminar del temporal los que no se trabajen  */
+        $deletedRows = Temporal::where('gestion_id', $idgestion)->where('tarea_id', $idtarea)->delete();
+    
+        return redirect()->route('tarea')
+        ->with('info', ' Descartado->'.$idgestion);
+    
+    }
+
 
     /**
      * Show the form for editing the specified resource.

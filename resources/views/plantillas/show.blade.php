@@ -41,8 +41,7 @@
                                    ID
                                </th>
                                <th>pregunta</th>
-                               <th>descripcion</th>
-                               <th>peso</th>
+                             
                                <th colspan="3">&nbsp;</th>
                            </tr>
                        </thead>
@@ -51,9 +50,15 @@
                                 <tr>
                                     <td>{{ $preguntas->id }}</td>
                                     <td>{{ $preguntas->pregunta }}</td>
-                                    <td>{{ $preguntas->descripcion }}</td>
-                                    <td>{{ $preguntas->peso }}</td>
                                     
+                                    
+                                    <td WIDTH="5px">
+                                        @can('pregunta.show')
+
+                                        <a href="{{ route('respuestas.create', $preguntas->id) }}" 
+                                            class="btn btn-sm btn-default">+Respuestas</a>
+                                        @endcan
+                                    </td>
                                     <td WIDTH="5px">
                                         @can('pregunta.show')
 
@@ -76,13 +81,7 @@
                                 
                                         @endcan
                                     </td>
-                                    <td WIDTH="5px">
-                                        @can('pregunta.show')
-
-                                        <a href="{{ route('respuestas.create', $preguntas->id) }}" 
-                                            class="btn btn-sm btn-default">+Resupestas</a>
-                                        @endcan
-                                    </td>
+                                   
 
                                 </tr>
                            @endforeach
@@ -93,7 +92,7 @@
                              Crear Pregunta
                         </a>
                    </table>
-                 
+                <a class="btn btn-sm btn-success" href="{{ URL::previous() }}">Volver</a>
                 </div>
         </div>
     </div>

@@ -83,7 +83,7 @@ body {
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
-                        @can('plantillas.index')
+                       
 
                         <li class="nav-item dropdown">
 
@@ -95,9 +95,7 @@ body {
                             </div>
                         </li>
                         
-                        @endcan
-
-                        @can('gestion')
+                       
                         
                         <li class="nav-item dropdown">
 
@@ -111,17 +109,14 @@ body {
 
                         
                       
-                        @endcan
-                        @can('users.index')
                          <li class="nav-item">
                             <a class="nav-link" href="{{ route('users.index') }}">Usuarios</a>
                         </li>
-                        @endcan
-                        @can('roles.index')
+                        
                          <li class="nav-item">
                             <a class="nav-link" href="{{ route('roles.index') }}">Roles</a>
                         </li>
-                        @endcan
+                       
                     </ul>
 
                     <!-- Right Side Of Navbar -->

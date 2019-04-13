@@ -22,7 +22,7 @@
                                    ID
                                </th>
                                <th>Respuesta</th>
-                               <th>descripcion</th>
+                         
                                <th>Valor</th>
                                <th colspan="3">&nbsp;</th>
                            </tr>
@@ -32,7 +32,7 @@
                                 <tr>
                                     <td>{{ $respuestas->id }}</td>
                                     <td>{{ $respuestas->respuesta }}</td>
-                                    <td>{{ $respuestas->comentario }}</td>
+                          
                                     <td>{{ $respuestas->valor_1 }}</td>
                                     
                                     <td WIDTH="5px">
@@ -71,7 +71,7 @@
                    </table>
                  
                 </div>
-            
+                <a class="btn btn-sm btn-success" href="{{ route('plantillas.index') }}">Plantillas</a>
         </div>
     </div>
 </div>

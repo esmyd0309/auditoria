@@ -67,7 +67,8 @@ Route::resource('temp', 'TempgestioneController')->except([
 
 Route::get('/temp/vista/{id}', 'TempgestioneController@index')->name('temp.index');
 Route::get('/temp/procesar/{id}/{tarea}/{seg}/{path}','EvaluacionController@proce')->name('evaluacion.proce');
-
+/**descartar del temporal los registros para que se puedan trabajar  */
+Route::get('/temp/temporal/{id}/{tarea}','EvaluacionController@temporal')->name('evaluacion.temporal');
 
 //Routes
 //restrincion de inico de sesion 

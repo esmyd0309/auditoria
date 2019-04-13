@@ -95,19 +95,25 @@
                                     No es compatible con la reproducción de audio del navegador
                                  
                             </audio><br>
+                            <div class="col-md-8">
                            <label for="" class="btn btn-sm">{{ $audioxs->start_time }}</label> 
                             
                     
-                            <input name="file" type="hidden" value=" {{ $audioxs->location }} " >
+                            <input name="file" type="hidden" value=" {{ $audioxs->location }} " ><br>
+                            </div>
+                            <div class="col-md-8">
+                            <div class="row justify-content-center">
+                            <a class="btn btn-sm btn-secondary" href="{{ route('evaluacion.temporal', [$gestion_id,$tarea]) }}">Descartar</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+                            
+                         
                     @endforeach 
-                    <div class="row justify-content-center">
                   
                            
                    
                     {{ form::submit('Guardar', ['class' => 'btn btn-sm btn-primary']) }}
-                    |||
+                   
                 
-    <a class="btn btn-sm btn-success" href="{{ URL::previous() }}">Volver</a>
+  
                         </div>
                         
     

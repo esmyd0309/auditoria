@@ -25,5 +25,5 @@
 
 
 <div class="form-group">
-    {{ form::submit('Guardar', ['class' => 'btn btn-sm btn-primary']) }}
+    {{ form::submit('Guardar', ['class' => 'btn btn-sm btn-primary']) }}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-sm btn-success" href="{{ URL::previous() }}">Volver</a>
 </div>
