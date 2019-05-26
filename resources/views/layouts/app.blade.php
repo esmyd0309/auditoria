@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-
-
+<meta name="_token" content="{!! csrf_token() !!}"/>
+<meta charset="Content-Type:application/json">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -12,9 +12,11 @@
     <title>DANPLUS</title>
 
     <!-- Scripts -->
+
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/laravel.js') }}" defer></script>
     
+    <script src="{{ asset('js/laravel.js') }}" defer></script>
+   
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
@@ -172,7 +174,13 @@ body {
             @yield('content')
         </main>
     </div>
-    <br>
+    
+    @yield('script')
+
+   
+ 
+
+<script src="{{ asset('js/Chart.min.js') }}" ></script>
 
     <!-- Footer -->
 <footer class="page-footer font-small blue" style="background-color: #e3f2fd;">
@@ -185,9 +193,6 @@ body {
 
 </footer>
 <!-- Footer -->
-<script>
 
-
-</script>
 </body>
 </html>

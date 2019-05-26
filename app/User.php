@@ -2,6 +2,7 @@
 
 namespace App;
 use Caffeinated\Shinobi\Traits\ShinobiTrait; 
+use Caffeinated\Shinobi\Models\Role; 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;

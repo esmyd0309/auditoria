@@ -49239,7 +49239,7 @@ var bus = new Vue();
 
 /***/ })
 /******/ ]);
-
+/*
 document.querySelector('.confirm_delete').addEventListener('submit', function(e) {
     var form = this;
     e.preventDefault();
@@ -49259,4 +49259,4 @@ document.querySelector('.confirm_delete').addEventListener('submit', function(e)
             form.submit();
         }
     });
-});
+});*/

@@ -79,9 +79,12 @@ class TareaController extends Controller
 
         $departamento = Departamento::all();
         $estado = Estado::distinct('status')->get();
-        //dd($estado);
+
+        $campana = DB::connection('asterisk')->select("SELECT campaign_id,campaign_name,campaign_description FROM vicidial_campaigns order by campaign_id asc");
+      
+        //dd($campana);
         $plantilla = Plantilla::all();
-        return view('tareas.create',compact('departamento','estado','plantilla'));
+        return view('tareas.create',compact('departamento','estado','plantilla','campana'));
     }
 
     /**
@@ -106,7 +109,7 @@ class TareaController extends Controller
       $tarea->descripcion = $request->descripcion;
       $tarea->departamentos_id = $request->departamentos_id;
       $tarea->estados = $request->estados;
-
+      $tarea->campaign_id = $request->campaign_id;
       $tarea->cantidad_registros = $request->cantidad_registros;
       $tarea->registros_agentes = $request->registros_agentes;
       $tarea->status = $request->status;
@@ -213,7 +216,13 @@ class TareaController extends Controller
     public function edit(Tarea $tarea)
     {
         $departamento = Departamento::all();
-        return view('tareas.edit', compact('tarea','departamento'));
+        $estado = Estado::distinct('status')->get();
+
+        $campana = DB::connection('asterisk')->select("SELECT campaign_id,campaign_name,campaign_description FROM vicidial_campaigns order by campaign_id asc");
+      
+        //dd($campana);
+        $plantilla = Plantilla::all();
+        return view('tareas.edit', compact('tarea','departamento','estado','plantilla','campana'));
     }
 
     /**
@@ -225,7 +234,11 @@ class TareaController extends Controller
      */
     public function update(Request $request, Tarea $tarea)
     {
-        //
+        $tarea->update($request->all());
+        //dd($request);
+
+        return redirect()->route('tarea', $tarea->id)
+        ->with('info', 'TAREA ACTUALIZADA');
     }
 
     /**

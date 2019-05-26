@@ -22,12 +22,12 @@ class PlantillaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request )
+    public function index()
 
     {
         
         $pregunta = Pregunta::all();
-        $plantillas = Plantilla::paginate(5);
+        $plantillas = Plantilla::orderBy('id', 'desc')->paginate(5);
         return view('plantillas.index', compact('plantillas','pregunta'));
 
         
@@ -217,6 +217,19 @@ class PlantillaController extends Controller
         }
         return Storage::download("$plantilla");
         
+    }
+
+    public function destroyplantilla(Request $request, $id){
+        if ($request->ajax()) {
+            $plantilla = Plantilla::find($id);
+            $plantilla->delete();
+            $plantilla_total = Plantilla::all()->count();
+
+            return \Response::json([
+                'total' => $plantilla_total,
+                'message' => $plantilla->nombre . ' Fue eliminada correctamente' 
+            ]);
+        }
     }
   
 

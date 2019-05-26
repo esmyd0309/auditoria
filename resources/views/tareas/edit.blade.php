@@ -12,7 +12,7 @@
                     {!! Form::model($tarea, ['route' => ['tarea.update', $tarea->id],
                         'method' => 'PUT']) !!}
 
-                            @include('tareas.partials.formpreg')
+                            @include('tareas.partials.form')
 
                     {!! Form::close() !!}
                  </div>

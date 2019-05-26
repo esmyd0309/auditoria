@@ -23,7 +23,7 @@
 
 
 
-<!--<div class="form-group">
+<div class="form-group">
     {{ form::label('peso', 'Peso') }}
     {{ form::number('peso', null, ['class' => 'form-control']) }}
     @if ($errors->has('peso'))
@@ -31,7 +31,7 @@
         <strong>{{ $errors->first('peso') }}</strong>
     </span>
 @endif
-</div>-->
+</div>
 
 
 <div class="form-group">

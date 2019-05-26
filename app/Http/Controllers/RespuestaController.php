@@ -58,7 +58,7 @@ class RespuestaController extends Controller
              $respuesta = new Respuesta;
              $respuesta->preguntas_id =$pregunta_id;
              $respuesta->respuesta = $request->input('respuesta');
-             $respuesta->comentario = $request->input('comentario');
+            // $respuesta->comentario = $request->input('comentario');
              $respuesta->valor_1 = $request->input('valor_1');
              $respuesta->fecha = $now->format('Y-m-d');
 

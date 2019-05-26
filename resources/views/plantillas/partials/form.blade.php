@@ -7,7 +7,7 @@
     {{ form::text('descripcion', null, ['class' => 'form-control']) }}
 </div>
 
-<div class="form-group">
+<!--<div class="form-group">
     {{ form::label('gestion', 'Tipo de Gestion') }}
     {{ form::text('gestion', null, ['class' => 'form-control']) }}
 </div>
@@ -15,7 +15,7 @@
 <div class="form-group">
     {{ form::label('ciudad', 'Ciudad') }}
     {{ form::text('ciudad', null, ['class' => 'form-control']) }}
-</div>
+</div>-->
 
 <div class="form-group">
     {{ form::label('maxima_calificacion', 'Maxima Calificacion') }}

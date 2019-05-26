@@ -38,6 +38,8 @@
 </select>
 </div>
 
+
+
    <div class="[ form-group ]">
             <input type="checkbox" name="status" id="fancy-checkbox-success" autocomplete="off" value="{{ $tarea->status }}"  />
             <div class="[ btn-group ]">
@@ -53,7 +55,7 @@
        
 
 <div class="form-group">
-    {{ form::submit('Guardar', ['class' => 'btn btn-sm btn-primary']) }}||||||||<a class="btn btn-sm btn-success" href="{{ URL::previous() }}">Volver</a>
+    {{ form::submit('Guardar', ['class' => 'btn btn-sm btn-primary']) }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-sm btn-success" href="{{ URL::previous() }}">Volver</a>
 </div>
 
 

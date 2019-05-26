@@ -71,7 +71,7 @@
                    </table>
                  
                 </div>
-                <a class="btn btn-sm btn-success" href="{{ route('plantillas.index') }}">Plantillas</a>
+                <a class="btn btn-sm btn-success" href="{{ route('plantillas.index') }}">Inicio</a>
         </div>
     </div>
 </div>

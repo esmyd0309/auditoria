@@ -18,12 +18,17 @@ use PDO;
 use lists;
 use DB;
 use Lang;
-
+use DateTime;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
+
+use App\Exports\ReportedetalleExport;
+use App\Exports\TareaExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class EvaluacionController extends Controller
 {
     public function __construct()
@@ -169,7 +174,6 @@ class EvaluacionController extends Controller
      */
     public function store(Request $request)
     {
-
         
         $pregunta_id                = $request->input('pregunta_id');//al igual de la plantilla 
         $respuesta_id               = $request->input('respuesta_id');//guardo lo que me viene del array del select
@@ -180,7 +184,7 @@ class EvaluacionController extends Controller
         $maxima_calificacion        = $request->input('maxima_calificacion');
         
         $seg = $request->input('seg');
-        //dd($request);
+       // dd($request);
          $user = \Auth::user()->id;
 
        
@@ -318,24 +322,41 @@ for ($i=0;$i<count($respuesta_id);$i++) //recorro el array que me viene del sele
                         $preguntarespuesta = new PreguntaRespuesta();//instancio la propiedad para almacenar los datos
                         
                         $preguntarespuesta->preguntas_id    =   $pregunta_id[$i];
-                        $preguntarespuesta->respuestas_id   =   $respuesta_id[$i];    
+                        
+                        
+                        if (!$respuesta_id[$i]) {
+                            $preguntarespuesta->respuestas_id   =   95;  //respuesta no aplica
+                            $preguntarespuesta->valor_1    =  100;
+                            $preguntarespuesta->calificacion    =  0;
+                            
+                        }else{
+                            $preguntarespuesta->respuestas_id   =   $respuesta_id[$i];  
+                            $preguntarespuesta->valor_1    =  0;
+                        }
+                        
+                      
                         $preguntarespuesta->evaluacions_id  =   $evaluacion->id;
                         $preguntarespuesta->comentario = $comentario[$i];
                         $valor = Pregunta::where('id',$pregunta_id[$i])->get();
-
+                      //  $preguntarespuesta->pregunta    =   $pregunta;
+                        //dd($preguntarespuesta->pregunta );
                             /**
                             * si la respuesta viene en null no aplico el guardado con la operacion arismetica
                             */
+                           
                         if ($respuesta_id[$i]) 
                         {
                                 foreach ( $valor  as   $valors ) 
                                 {
                             
                                      $preguntarespuesta->calificacion    =  $valors->peso;
+                                    
+                                  // dd( $preguntarespuesta->calificacion);
+                                    
                                 }
                         }
-
-
+                        
+                       
                         /**detalle del cliente del predictivo */
                         $preguntarespuesta->agente      =   $agente;
                         $preguntarespuesta->telefono    =   $telefono;
@@ -356,14 +377,14 @@ for ($i=0;$i<count($respuesta_id);$i++) //recorro el array que me viene del sele
 
 
                         /**detalle de las preguntas */
-                        $preguntarespuesta->pregunta    =   $pregunta;
+                    
                         $preguntarespuesta->descripcion  =   $descripcion;
                         $preguntarespuesta->peso      =   $peso;
                         $preguntarespuesta->tipo         =   $tipo;
 
                         /**detalle de las respuestas de esas preguntas  */
-                        $preguntarespuesta->respuesta  =   $respuestax;
-                        $preguntarespuesta->valor_1         =   $valor_1;
+                       // $preguntarespuesta->respuesta  =   $respuestax;
+                        
                         $preguntarespuesta->tarea_id         =   $tareas_id;
                         $preguntarespuesta->save();
                     }
@@ -466,10 +487,17 @@ for ($i=0;$i<count($respuesta_id);$i++) //recorro el array que me viene del sele
     {
 
       
-        $gestiontm=PreguntaRespuesta::where('evaluacions_id',$id)->get();
+        //$gestiontm=PreguntaRespuesta::where('evaluacions_id',$id)->get();
         $evaluacion=Evaluacion::where('id',$id)->get();
-     
-         //dd($gestiontmx);
+
+        $gestiontm = DB::table('pregunts_respuests')
+        ->join('preguntas', 'pregunts_respuests.preguntas_id', '=', 'preguntas.id')
+        ->join('respuestas', 'pregunts_respuests.respuestas_id', '=', 'respuestas.id')
+        ->select('pregunts_respuests.*', 'preguntas.*', 'respuestas.*')->where('pregunts_respuests.evaluacions_id',$id)
+        ->get();
+
+
+       // dd($gestiontm);
         return view('evaluaciones.detalle', compact('gestiontm','evaluacion'));
 
     }
@@ -536,6 +564,120 @@ for ($i=0;$i<count($respuesta_id);$i++) //recorro el array que me viene del sele
         //
     }
 
+    public function export($id){
+        $date = new DateTime(); 
+        $d= $date->format('Y-m-d H:i:s');
+        return (new ReportedetalleExport($id))->download($d .'Gestion'. $id .'.xls');
+        //return Excel::download(new ReportedetalleExport, 'users.xlsx');
+    }
+
+    public function exporttarea($id){
+        $date = new DateTime(); 
+        $d= $date->format('Y-m-d H:i:s');
+        
+        return (new TareaExport($id))->download($d .'Tarea'. $id .'.xls');
+        //return Excel::download(new ReportedetalleExport, 'users.xlsx');
+    }
+    
+     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function indicadores(Request $request)
+    {
+        $id = $request->input('id');
+
+         /**promedio de cada pregunta seleccionada */
+        $results = DB::select(" 
+        SELECT ROUND(AVG(a.calificacion),2) AS promediox,b.pregunta AS preguntax 
+        from pregunts_respuests AS a , preguntas AS b WHERE a.preguntas_id=b.id AND tarea_id=$id
+        GROUP BY b.pregunta
+        
+        ");
+      
+        return response()->json($results);
+       // dd($request);
+
+    }
+
+    public function indicadores2(Request $request)
+    {
+        $id = $request->input('id');
+
+         /**promedio de cada pregunta seleccionada */
+        $results = DB::select(" 
+        
+        SELECT agente,ROUND(AVG(calificacion),2) calificacion ,COUNT(cedula) AS clientes 
+        FROM evaluacions 
+        WHERE tarea_id=$id 
+        GROUP BY agente 
+        ");
+      
+        return response()->json($results);
+       // dd($request);
+
+    }
+
+    public function indica_llamadas(Request $request)
+    {
+        $id = $request->input('id');
+
+         /**promedio de cada pregunta seleccionada */
+        $results = DB::select(" 
+        
+        SELECT COUNT(a.id) AS llamadas,count(DISTINCT(a.agente)) AS agentes,b.cantidad_registros 
+        FROM evaluacions AS a, tareas AS b 
+        WHERE tarea_id=$id AND tarea_id=b.id
+        GROUP BY b.cantidad_registros  
+        ");
+      
+        return response()->json($results);
+       // dd($request);
+
+    }
+
+
+    public function cantpreguntasAgente(Request $request)
+    {
+        $id = $request->input('id');
+
+         /**cantidad de agentes por pregunta positivas */
+        $results = DB::select(" 
+       
+
+          SELECT b.pregunta AS pregunta,ROUND(AVG(a.valor_1),2) AS calificacion,count(a.agente) AS agente 
+		  FROM pregunts_respuests AS a  , preguntas AS b 
+		  WHERE  a.tarea_id=$id   AND a.preguntas_id=b.id
+			GROUP BY  b.pregunta
+
+
+        ");
+      
+        return response()->json($results);
+       // dd($request);
+
+    }
+
+    
+    public function detalleagente(Request $request)
+    {
+        $id = $request->input('id');
+
+         /**cantidad de agentes por calificacion  */
+        $results = DB::select(" 
+        SELECT agente,ROUND(AVG(calificacion),2) AS calificacion,estado,cedula,grupo,grabacion AS grabacion 
+        FROM evaluacions 
+         WHERE tarea_id=$id
+         GROUP BY agente,estado,cedula,grupo,grabacion
+   
+        ");
+      
+        return response()->json($results);
+       // dd($request);
+
+    }
 
     
 }

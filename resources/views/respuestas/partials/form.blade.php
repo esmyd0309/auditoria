@@ -5,12 +5,12 @@
 <!-- <div class="form-group">
     {{ form::label('comentario', 'Descrición de la Respuesta') }}
     {{ form::text('comentario', null, ['class' => 'form-control']) }}
-</div> -->
+</div>
 
 <div class="form-group">
     {{ form::label('valor_1', 'Peso') }}
     {{ form::number('valor_1', null, ['class' => 'form-control']) }}
-</div>
+</div> -->
 
 
 

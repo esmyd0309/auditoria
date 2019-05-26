@@ -10,7 +10,7 @@ class Tarea extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'nombre', 'descripcion','cantidad_registros','registros_agentes', 'fecha', 'status','departamentos_id','estados','fechadesde','fechahasta','plantillas_id',
+        'nombre', 'descripcion','cantidad_registros','registros_agentes', 'fecha', 'status','departamentos_id','estados','fechadesde','fechahasta','plantillas_id','campaign_id',
     ];
 
 

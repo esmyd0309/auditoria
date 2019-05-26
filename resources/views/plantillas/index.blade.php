@@ -7,14 +7,20 @@
             <div class="card">
                 <div class="card-header">
                     Plantillas
-
                     @can('plantillas.create')<!-- verificar si tiene permisos. -->
+                    <p> 
+                        <span id="plantilla-total">{{ $plantillas->total() }} registros | 
+                            página {{ $plantillas->currentPage() }}
+                            de {{ $plantillas->lastPage() }}
+                        </span>
+                    </p>
                     <a href="{{ route('plantillas.create') }}" 
                         class="btn btn-sm btn-primary float-right ">
                         Crear 
                     </a>
                     @endcan
                 </div>
+                <div id="alert" class="alert alert-info"></div>
                 <div class="card-body">
                    <table class="table table-scriped table-hover">
                        <thead>
@@ -53,8 +59,12 @@
                                         @endcan
                                     </td>
                                     
-                                    <td WIDTH="5px">
-                                  
+                                    <td WIDTH="20px">
+                                    {!! Form::open(['route' => ['destroyplantilla', $plantillass->id],
+                                       'method' => 'DELETE']) !!}
+                                            <a href="#" class="btn-delete">Eliminar</a>
+                                       
+                                   {!! Form::close() !!}
                                     </td>
 
                                 </tr>
@@ -71,3 +81,9 @@
 </div>
 @endsection
 
+@section('script')
+<script src="{{ asset('js/jquery-3.4.0.min.js') }}" ></script>
+<!-- Scripts -->
+<script src="{{ asset('js/script.js') }}" ></script>
+
+@endsection

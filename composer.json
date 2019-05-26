@@ -12,7 +12,8 @@
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "5.7.*",
         "laraveles/spanish": "^1.1",
-        "maatwebsite/excel": "^3.1"
+        "maatwebsite/excel": "^3.1",
+        "styde/html": "~1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",

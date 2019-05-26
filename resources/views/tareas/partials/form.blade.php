@@ -37,7 +37,20 @@
     @endif
 </select>
 </div>
-
+    <div class="form-group">
+    {{ form::label('campaign_id', 'Campaña') }}
+    <select name="campaign_id" class="browser-default custom-select" class="form-control{{ $errors->has('campaign_id') ? ' is-invalid' : ''  }}" autofocus value="" >
+        <option value="">-- Campaña --</option>
+        @foreach ($campana as $campanas)
+            <option value="{{ $campanas->campaign_id }}">{{ $campanas->campaign_id }} {{ $campanas->campaign_name }}</option>
+        @endforeach
+        @if ($errors->has('campaign_id'))
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $errors->first('campaign_id') }}</strong>
+            </span>
+        @endif
+    </select>
+    </div>
 
 <div class="form-group">
 {{ form::label('plantillas_id', 'Plantilla') }}
@@ -112,5 +125,5 @@
         </div>
        
 <div class="form-group">
-    {{ form::submit('Guardar', ['class' => 'btn btn-sm btn-primary']) }}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-sm btn-success" href="{{ URL::previous() }}">Volver</a>
+    {{ form::submit('Guardar', ['class' => 'btn btn-sm btn-primary']) }}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-sm btn-success" href="{{ route('tarea') }}">Volver</a>
 </div>

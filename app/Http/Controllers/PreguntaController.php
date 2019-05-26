@@ -87,12 +87,12 @@ class PreguntaController extends Controller
                     $respuestas->save();
                 
             }
-            if ($pregunta->tipo == 'cerrada') {
+           /* if ($pregunta->tipo == 'cerrada') {
                 $respuestas = new Respuesta;
                     $respuestas->preguntas_id = $pregunta->id;
                     $respuestas->respuesta = 'NO';
                     $respuestas->save();
-            }
+            }*/
             
            
            
@@ -162,5 +162,18 @@ class PreguntaController extends Controller
        
         return redirect()->route('plantillas.show', $plantilla_id)
         ->with('info', ' Pregunta Eliminada Correctamente');
+    }
+
+    public function destroypregunta(Request $request, $id){
+        if ($request->ajax()) {
+            $pregunta = Pregunta::find($id);
+            $pregunta->delete();
+            $pregunta_total = Pregunta::all()->count();
+
+            return \Response::json([
+                'total' => $pregunta_total,
+                'message' => $pregunta->pregunta . ' Fue eliminada correctamente' 
+            ]);
+        }
     }
 }

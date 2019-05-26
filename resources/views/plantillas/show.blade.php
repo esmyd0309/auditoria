@@ -11,16 +11,7 @@
                         class="btn btn-sm btn-success float-right ">
                         Editar Plantilla
                     </a>
-                    @can('plantillas.destroy')
-                            {!! Form::open(['route' => ['plantillas.destroy', $plantilla->id],
-                            'method' => 'DELETE']) !!}
-
-                                <button class="btn btn-sm btn-danger" onclick="return confirm('¿ ESTAS SEGURO QUE DESEAS ELIMINAR ?')">
-                                    Eliminar
-                                </button>
-                            {!! Form::close() !!}
-                            
-                    @endcan
+                  
                 </div>  
                 <div class="card-body">
                     <p><strong>Nombre</strong> {{ $plantilla->nombre }}</p>
@@ -28,12 +19,11 @@
                     <p><strong>Gestion</strong> {{ $plantilla->gestion }}</p>
                     <p><strong>Ciudad</strong> {{ $plantilla->ciudad }}</p>
                     <p><strong>Maxima Calificacion</strong> {{ $plantilla->maxima_calificacion }}</p>
-                    <p><strong>archivo</strong> {{ $plantilla->filename }}</p>
-                    <a href="{{ route('media.ver', $plantilla->id) }}" 
-                                            class="btn btn-sm btn-default">descargar</a>
-                </div>
+                
+                    
             </div>
             <div class="card-body">
+            <div id="alert" class="alert alert-info"></div>
                    <table class="table table-scriped table-hover">
                        <thead>
                            <tr>
@@ -56,14 +46,14 @@
                                         @can('pregunta.show')
 
                                         <a href="{{ route('respuestas.create', $preguntas->id) }}" 
-                                            class="btn btn-sm btn-default">+Respuestas</a>
+                                            class="btn btn-sm btn-primary">+Respuestas</a>
                                         @endcan
                                     </td>
                                     <td WIDTH="5px">
                                         @can('pregunta.show')
 
                                         <a href="{{ route('preguntas.show', $preguntas->id) }}" 
-                                            class="btn btn-sm btn-default">Detalle</a>
+                                            class="btn btn-sm btn-info">Detalle</a>
                                             
                                         @endcan
                                     </td>
@@ -71,12 +61,10 @@
                                     <td WIDTH="5px">
                                
                                         @can('preguntas.destroy')
-                                            {!! Form::open(['route' => ['preguntas.destroy', $preguntas->id, $plantilla->id],
+                                            {!! Form::open(['route' => ['destroypregunta', $preguntas->id],
                                                 'method' => 'DELETE']) !!}
-
-                                                <button class="btn btn-sm btn-danger" onclick="return confirm('¿ ESTAS SEGURO QUE DESEAS ELIMINAR ?')">
-                                                    Eliminar
-                                                </button>
+                                                <a href="#" class="btn-delete">Eliminar</a>
+                                               
                                             {!! Form::close() !!}
                                 
                                         @endcan
@@ -97,4 +85,12 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+
+<script src="{{ asset('js/jquery-3.4.0.min.js') }}" ></script>
+<!-- Scripts -->
+<script src="{{ asset('js/scriptpreguntas.js') }}" ></script>
+
 @endsection

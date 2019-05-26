@@ -24,10 +24,10 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('preguntas/create/{id}','PreguntaController@create')->name('preguntas.create');
 Route::post('preguntas/store/{id}','PreguntaController@store')->name('preguntas.store');
 Route::get('preguntas/show/{preguntas}','PreguntaController@show')->name('preguntas.show');
-Route::delete('preguntas/destroy/{preguntas}/{plantilla}','PreguntaController@destroy')->name('preguntas.destroy');
+//Route::delete('preguntas/destroy/{preguntas}/{plantilla}','PreguntaController@destroy')->name('preguntas.destroy');
 Route::get('preguntas/{preguntas}/edit','PreguntaController@destroy')->name('preguntas.edit');
 Route::put('preguntas/{preguntas}','PreguntaController@update')->name('preguntas.update');
-
+Route::DELETE('/eliminar-pregunta/{id}','PreguntaController@destroypregunta' )->name('destroypregunta');
 
 Route::get('respuestas/create/{id}','RespuestaController@create')->name('respuestas.create');
 Route::post('respuestas/store/{id}','RespuestaController@store')->name('respuestas.store');
@@ -48,8 +48,14 @@ Route::get('/evaluacion','EvaluacionController@index')->name('evaluacion.index')
 /**detalle de las gestiones */
 Route::get('/evaluacion/{id}/detalle','EvaluacionController@detalle')->name('actualicions.detalle');
 
-/**descargar destalle individual */
-Route::get('/evaluacion/{id}/descargar','EvaluacionController@descargar')->name('actualicions.descargar');
+/** Destalle indicadores */
+
+
+Route::POST('indicadores', 'EvaluacionController@indicadores');
+Route::POST('indicadores2', 'EvaluacionController@indicadores2');
+Route::POST('indica_llamadas', 'EvaluacionController@indica_llamadas');
+Route::POST('cantpreguntasAgente', 'EvaluacionController@cantpreguntasAgente');
+Route::POST('detalleagente', 'EvaluacionController@detalleagente');
 
 
 //Route::resource('evaluacion','EvaluacionController');
@@ -65,7 +71,9 @@ Route::resource('temp', 'TempgestioneController')->except([
         'index'
     ]);
 
+
 Route::get('/temp/vista/{id}', 'TempgestioneController@index')->name('temp.index');
+Route::get('valores', 'TempgestioneController@gestion')->name('temp.valores');
 Route::get('/temp/procesar/{id}/{tarea}/{seg}/{path}','EvaluacionController@proce')->name('evaluacion.proce');
 /**descartar del temporal los registros para que se puedan trabajar  */
 Route::get('/temp/temporal/{id}/{tarea}','EvaluacionController@temporal')->name('evaluacion.temporal');
@@ -121,6 +129,7 @@ Route::middleware(['auth'])->group(function(){
         Route::get('plantillass/{plantilla}/edit','PlantillaController@editplantilla')->name('plantillass.edit')
         ->middleware('permission:plantillas.edit');
 
+        Route::DELETE('/eliminar-plantilla/{id}','PlantillaController@destroyplantilla' )->name('destroyplantilla');
 
 
 
@@ -164,3 +173,19 @@ Route::post('media', function () {
     return request()->file->storeAs('uploads', request()->file->getClientOriginalName());
 });
 */
+/**DESCARGAS DE REPORTES / REPORTE POR GESTION  */
+Route::get('/evaluaciones/{id}/gestion','EvaluacionController@export')->name('gestion.descargar');
+
+/**DESCARGAS DE REPORTES / REPORTE POR TAREA  */
+Route::get('/evaluaciones/{id}/tarea','EvaluacionController@exporttarea')->name('tarea.descargar');
+
+/**Padres */
+
+Route::get('padres', 'PadresController@index')->name("padres");
+Route::get('padres/create', 'PadresController@create')->name("padres.create");
+Route::post('padres/store', 'PadresController@store')->name("padres.store");
+
+Route::get('padres/lista', 'PadresController@lista')->name("padres.lista");
+Route::get('padres/listas', 'PadresController@listas')->name("padres.listas");
+
+

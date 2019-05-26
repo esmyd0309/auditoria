@@ -160,7 +160,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class,
+        Styde\Html\HtmlServiceProvider::class,
         
         Laraveles\Spanish\SpanishServiceProvider::class,
 
@@ -175,6 +175,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Caffeinated\Shinobi\ShinobiServiceProvider::class,
     ],
@@ -224,6 +225,8 @@ return [
         'Storage' => Illuminate\Support\Facades\Storage::class,
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
+
+        'Shinobi' => Caffeinated\Shinobi\Facades\Shinobi::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,

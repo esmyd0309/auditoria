@@ -90,8 +90,8 @@
                            
 
                         @foreach ($audiox as $audioxs)
-                            <audio controls="" preload="none"> 
-                                <source src="{{ $audioxs->location }}" type="audio/mp3">
+                            <audio controls autoplay loop  preload class="containerPlayer"> 
+                                <source src="{{ $audioxs->location }}" type="audio/mp3" >
                                     No es compatible con la reproducción de audio del navegador
                                  
                             </audio><br>
