@@ -88,7 +88,8 @@ class RespuestaController extends Controller
      */
     public function edit(Respuesta $respuesta)
     {
-        //
+        //dd($respuesta);
+        return view('respuestas.edit', compact('respuesta'));
     }
 
     /**
@@ -100,7 +101,14 @@ class RespuestaController extends Controller
      */
     public function update(Request $request, Respuesta $respuesta)
     {
-        //
+        
+        //dd($request);
+        
+        $respuesta->update($request->all());
+        
+
+        return redirect()->route('preguntas.show', $request->preguntas_id)
+        ->with('info', 'RESPUESTA ACTUALIZADA');
     }
 
     /**

@@ -9,8 +9,8 @@
                 <div class="card-body">
                     <p><strong>Respuesta: </strong> {{ $respuesta->respuesta }}</p>
                 
-                    <p><strong>Valor: </strong> {{ $respuesta->valor_1 }}</p>
-                    <p><strong>Fecha: </strong> {{ $respuesta->fecha }}</p>
+                  <!--  <p><strong>Valor: </strong> {{ $respuesta->valor_1 }}</p>
+                    <p><strong>Fecha: </strong> {{ $respuesta->fecha }}</p>-->
                 
                 </div>
             </div>

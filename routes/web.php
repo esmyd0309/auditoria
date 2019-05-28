@@ -24,8 +24,11 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('preguntas/create/{id}','PreguntaController@create')->name('preguntas.create');
 Route::post('preguntas/store/{id}','PreguntaController@store')->name('preguntas.store');
 Route::get('preguntas/show/{preguntas}','PreguntaController@show')->name('preguntas.show');
+Route::resource('preguntas', 'PreguntaController')->except([
+        'create','store','show',
+    ]);
 //Route::delete('preguntas/destroy/{preguntas}/{plantilla}','PreguntaController@destroy')->name('preguntas.destroy');
-Route::get('preguntas/{preguntas}/edit','PreguntaController@destroy')->name('preguntas.edit');
+//Route::get('/preguntas/{preguntas}/edit','PreguntaController@edit')->name('preguntas.edit');
 Route::put('preguntas/{preguntas}','PreguntaController@update')->name('preguntas.update');
 Route::DELETE('/eliminar-pregunta/{id}','PreguntaController@destroypregunta' )->name('destroypregunta');
 
@@ -33,7 +36,9 @@ Route::get('respuestas/create/{id}','RespuestaController@create')->name('respues
 Route::post('respuestas/store/{id}','RespuestaController@store')->name('respuestas.store');
 Route::get('respuestas/show/{respuesta}','RespuestaController@show')->name('respuestas.show');
 Route::delete('/respuestas/destroy/{respuestas}/{pregunta}','RespuestaController@destroy')->name('respuestas.destroy');
-
+Route::resource('respuestas', 'RespuestaController')->except([
+        'create','store','show','destroy'
+    ]);
 
 
 Route::get('/gestion/show/{gestion}', 'GestionController@show')->name('gestion.show');

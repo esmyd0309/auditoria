@@ -53,11 +53,18 @@
                                         @can('pregunta.show')
 
                                         <a href="{{ route('preguntas.show', $preguntas->id) }}" 
-                                            class="btn btn-sm btn-info">Detalle</a>
+                                            ><img src="{{ asset('icono/svg/eye.svg') }} "   width="30" height="30" ></a>
                                             
                                         @endcan
                                     </td>
-                                    
+                                    <td WIDTH="5px">
+                                        @can('pregunta.show')
+
+                                        <a href="{{ route('preguntas.edit', $preguntas->id) }}" 
+                                            ><img src="{{ asset('icono/svg/brush.svg') }}  " width="30" height="30" onclick="return confirm('¿ ESTAS SEGURO QUE DESEAS ACTUALIZAR ESTA PREGUNTA ?')"></a>
+                                            
+                                        @endcan
+                                    </td>
                                     <td WIDTH="5px">
                                
                                         @can('preguntas.destroy')

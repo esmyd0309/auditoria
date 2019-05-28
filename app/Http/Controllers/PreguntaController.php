@@ -132,6 +132,7 @@ class PreguntaController extends Controller
     public function edit(Pregunta $pregunta)
 
     {
+       // dd($pregunta);
         return view('preguntas.edit', compact('pregunta'));
     }
 
@@ -144,7 +145,11 @@ class PreguntaController extends Controller
      */
     public function update(Request $request, Pregunta $pregunta)
     {
-        //
+        $pregunta->update($request->all());
+        //dd($request);
+
+        return redirect()->route('preguntas.show', $pregunta->id)
+        ->with('info', 'PREGUNTA ACTUALIZADA');
     }
 
     /**
