@@ -5,6 +5,7 @@ use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\Exportable;
 use App\Reportedetalle;
 use App\PreguntaRespuesta;
+use App\Evaluacion;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Illuminate\Contracts\View\View;
@@ -25,20 +26,19 @@ class TareaExport implements FromQuery,WithHeadings
     {
         return [
             'Id',
-            'Fecha',
+            'Fecha Evaluacion',
             'Grupo',
-            'Agente',
+            'Lead_id',
             'Estado',
+            'Agente',
+            'Calificacion',
             'Cedula',
             'Nombres',
             'Telefono',
             'Grabacion',
-            'Calificacion',
-            'Preguntas',
-            'Respuestas',
-            'Peso',
-            'Comentario',
-            'Descacalificacion',
+            'Auditor',
+            'Plantilla',
+            'Tarea',
             
         ];
     }
@@ -56,15 +56,15 @@ class TareaExport implements FromQuery,WithHeadings
     public function query()
     {
         
-        return PreguntaRespuesta::query()
-        ->select('evaluacions.id','pregunts_respuests.created_at', 'evaluacions.grupo','evaluacions.agente','evaluacions.estado','evaluacions.cedula','evaluacions.nombre','evaluacions.telefono','evaluacions.grabacion','evaluacions.calificacion'
-        ,'preguntas.pregunta','respuestas.respuesta','preguntas.peso','pregunts_respuests.comentario')
-        ->from('pregunts_respuests')
-        ->join('evaluacions', 'evaluacions.id', '=', 'pregunts_respuests.evaluacions_id')
-        ->join('tareas', 'pregunts_respuests.tarea_id', '=', 'tareas.id')
-        ->join('preguntas', 'pregunts_respuests.preguntas_id', '=', 'preguntas.id')
-        ->join('respuestas', 'pregunts_respuests.respuestas_id', '=', 'respuestas.id')
-        ->where('pregunts_respuests.tarea_id',$this->id);
+        return Evaluacion::query()->select('evaluacions.id','evaluacions.created_at','evaluacions.grupo',
+        'evaluacions.gestions_id','evaluacions.estado', 'evaluacions.agente','evaluacions.calificacion','evaluacions.cedula',
+        'evaluacions.nombre','evaluacions.telefono','evaluacions.grabacion','users.name','plantillas.nombre AS plantilla','tareas.nombre AS tarea')
+        ->from('evaluacions')
+        ->join('users', 'evaluacions.users_id', '=', 'users.id')
+        ->join('plantillas', 'evaluacions.plantillas_id', '=', 'plantillas.id')
+        ->join('tareas', 'evaluacions.tarea_id', '=', 'tareas.id')
+        ->where('evaluacions.tarea_id',$this->id);
+       
 
        
     }

@@ -23,8 +23,8 @@
                                </th>
                                <th>Respuesta</th>
                          
-                               <th>Valor</th>
-                               <th colspan="3">&nbsp;</th>
+                               <!--<th>Valor</th>-->
+                               <th colspan="3">Acciones</th>
                            </tr>
                        </thead>
                        <tbody>
@@ -33,7 +33,7 @@
                                     <td>{{ $respuestas->id }}</td>
                                     <td>{{ $respuestas->respuesta }}</td>
                           
-                                    <td>{{ $respuestas->valor_1 }}</td>
+                                    <!--<td>{{ $respuestas->valor_1 }}</td>-->
                                     
                                     <td WIDTH="5px">
                                         @can('respuesta.show')

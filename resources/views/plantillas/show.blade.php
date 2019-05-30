@@ -16,8 +16,8 @@
                 <div class="card-body">
                     <p><strong>Nombre</strong> {{ $plantilla->nombre }}</p>
                     <p><strong>Descripción</strong> {{ $plantilla->descripcion }}</p>
-                    <p><strong>Gestion</strong> {{ $plantilla->gestion }}</p>
-                    <p><strong>Ciudad</strong> {{ $plantilla->ciudad }}</p>
+                   <!-- <p><strong>Gestion</strong> {{ $plantilla->gestion }}</p>
+                    <p><strong>Ciudad</strong> {{ $plantilla->ciudad }}</p>-->
                     <p><strong>Maxima Calificacion</strong> {{ $plantilla->maxima_calificacion }}</p>
                 
                     

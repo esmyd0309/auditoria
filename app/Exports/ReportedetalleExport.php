@@ -33,11 +33,13 @@ class ReportedetalleExport implements FromQuery,WithHeadings
             'Nombres',
             'Telefono',
             'Grabacion',
-            'Calificacion',
+           
             'Preguntas',
             'Respuestas',
-            'Peso',
+            'Valor',
+            'Fallas por parametro',
             'Comentario',
+            'Calificacion',
         ];
     }
 
@@ -54,8 +56,11 @@ class ReportedetalleExport implements FromQuery,WithHeadings
     public function query()
     {
         return Evaluacion::query()
-        ->select('evaluacions.id','pregunts_respuests.created_at', 'evaluacions.grupo','evaluacions.agente','evaluacions.estado','evaluacions.cedula','evaluacions.nombre','evaluacions.telefono','evaluacions.grabacion','evaluacions.calificacion'
-        ,'preguntas.pregunta','respuestas.respuesta','preguntas.peso','pregunts_respuests.comentario')
+        ->select('evaluacions.id','pregunts_respuests.created_at', 'evaluacions.grupo',
+        'evaluacions.agente','evaluacions.estado','evaluacions.cedula','evaluacions.nombre',
+        'evaluacions.telefono','evaluacions.grabacion'
+        ,'preguntas.pregunta','respuestas.respuesta','preguntas.peso','pregunts_respuests.valor_1',
+        'pregunts_respuests.comentario','evaluacions.calificacion')
         ->from('evaluacions')
         ->join('pregunts_respuests', 'pregunts_respuests.evaluacions_id', '=', 'evaluacions.id')
         ->join('preguntas', 'pregunts_respuests.preguntas_id', '=', 'preguntas.id')

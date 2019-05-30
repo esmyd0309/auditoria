@@ -105,7 +105,7 @@ $gestiontm = DB::connection('asterisk')->table('vicidial_list')
             ->whereNotIn('vicidial_log.lead_id',$gestions_idx)
           //  ->where('vicidial_log.call_date','',$ds) //sacar por fechas desde 
             ->orderBy('vicidial_log.uniqueid', 'desc')
-            ->take(50)->get();
+            ->take(150)->get();
             //->paginate(10);
 
 /*
