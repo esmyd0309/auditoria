@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 */
 Auth::routes();
-
+Route::get('/users/create','RegisterController@create')->name('users.create');
 Route::get('/', 'HomeController@index')->name('home');
 //Route::resource('/plantillas', 'PlantillaController');
 
@@ -164,6 +164,9 @@ Route::middleware(['auth'])->group(function(){
   
       Route::get('users/{user}/edit','UserController@edit')->name('users.edit')
             ->middleware('permission:users.edit');
+
+      
+     
 });
  
 
@@ -183,6 +186,7 @@ Route::get('/evaluaciones/{id}/gestion','EvaluacionController@export')->name('ge
 
 /**DESCARGAS DE REPORTES / REPORTE POR TAREA  */
 Route::get('/evaluaciones/{id}/tarea','EvaluacionController@exporttarea')->name('tarea.descargar');
+Route::get('/evaluaciones/{id}/tareadetalle','EvaluacionController@exporttareadetalle')->name('tareadetalle.descargar');
 
 /**Padres */
 

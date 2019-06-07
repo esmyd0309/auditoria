@@ -25,7 +25,7 @@
                             </div>
                         </div>
                         @endcan
-                       
+                        @can('tarea')
                         <div class="col-sm-6">
                             <div class="card">
                                 <div class="card-body">
@@ -35,7 +35,7 @@
                             </div>
                         </div>
                     </div>
-               
+                    @endcan
                     @can('users.index')
                     <div class="row">
                         <div class="col-sm-6">

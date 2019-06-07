@@ -36,7 +36,7 @@
                                     <!--<td>{{ $respuestas->valor_1 }}</td>-->
                                     
                                     <td WIDTH="5px">
-                                        @can('respuesta.show')
+                                        @can('respuestas.show')
 
                                         <a href="{{ route('respuestas.show', $respuestas->id) }}" 
                                             ><img src="{{ asset('icono/svg/eye.svg') }} "   width="30" height="30" ></a>
@@ -44,7 +44,7 @@
                                     </td>
                                     
                                     <td WIDTH="5px">
-                                    @can('respuesta.show')
+                                    @can('respuestas.show')
 
                                     <a href="{{ route('respuestas.edit', $respuestas->id) }}" 
                                         ><img src="{{ asset('icono/svg/brush.svg') }}  " width="30" height="30" onclick="return confirm('¿ ESTAS SEGURO QUE DESEAS ACTUALIZAR ESTA RESPUESTA ?')"></a>

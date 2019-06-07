@@ -58,7 +58,7 @@
                                             class="btn btn-sm btn-success">+Preguntas {{ count($plantillass->preguntas) }}</a>
                                         @endcan
                                     </td>
-                                    
+                                    @can('plantillas.destroy')
                                     <td WIDTH="20px">
                                     {!! Form::open(['route' => ['destroyplantilla', $plantillass->id],
                                        'method' => 'DELETE']) !!}
@@ -66,7 +66,7 @@
                                        
                                    {!! Form::close() !!}
                                     </td>
-
+                                    @endcan
                                 </tr>
                            @endforeach
                        </tbody>

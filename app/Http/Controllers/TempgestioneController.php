@@ -34,20 +34,22 @@ class TempgestioneController extends Controller
     {
         $idtarea = $id;
 
-   
+  
         $evaluaciones = DB::select("SELECT gestions_id FROM evaluacions WHERE tarea_id= $idtarea");
        //$evaluaciones = DB::table('evaluacions')->select('gestions_id')->where('tarea_id',$idtarea)->first();
        //$evaluacionesx = DB::table('evaluacions')->select('gestions_id')->where('tarea_id',$idtarea)->get();
       //dd($evaluaciones);
 
-     $grupos = DB::table('tareas')->select('departamentos_id','estados','campaign_id')->where('id',$idtarea)->get();
+     $grupos = DB::table('tareas')->select('departamentos_id','estados','campaign_id','fechadesde','fechahasta')->where('id',$idtarea)->get();
     
      foreach ($grupos as  $grupo) {
        $grupos =$grupo->departamentos_id;
        $estados =$grupo->estados;
        $campaign_id =$grupo->campaign_id;
+       $fechadesde =$grupo->fechadesde;
+       $fechahasta =$grupo->fechahasta;
      }
-    
+    //dd($fechahasta);
      
      
    
@@ -84,7 +86,7 @@ class TempgestioneController extends Controller
 $date = new DateTime(); // Por defecto la hora actual
 $call_date = $date->modify('-20 minutes');
 $ds= $call_date->format('Y-m-d');
-
+//dd($fechahasta);
 
 $gestiontm = DB::connection('asterisk')->table('vicidial_list')
             ->join('vicidial_log', 'vicidial_list.lead_id', '=', 'vicidial_log.lead_id')
@@ -100,12 +102,16 @@ $gestiontm = DB::connection('asterisk')->table('vicidial_list')
                       'vicidial_list.last_name',
                       'vicidial_list.first_name')
             
+            
             ->where('vicidial_log.status',$estados)
             ->where('vicidial_log.campaign_id','=',$campaign_id)
             ->whereNotIn('vicidial_log.lead_id',$gestions_idx)
-          //  ->where('vicidial_log.call_date','',$ds) //sacar por fechas desde 
+            ->where('vicidial_log.call_date','>=',$fechadesde)
+             //sacar por fechas desde
+            //->where('vicidial_log.call_date','<=',$fechahasta) //sacar por fechas desde  
+           //
             ->orderBy('vicidial_log.uniqueid', 'desc')
-            ->take(150)->get();
+            ->take(200)->get();
             //->paginate(10);
 
 /*

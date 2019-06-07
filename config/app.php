@@ -175,9 +175,10 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        
         Caffeinated\Shinobi\ShinobiServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
     ],
 
     /*

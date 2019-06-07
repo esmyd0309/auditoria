@@ -35,7 +35,9 @@
 
 </div>
 <div class="col-md-2">
+@can('tarea.create')
 <a href="{{ route('tarea.create') }}" ><img src="http://192.168.1.107/auditoria/public/iconos/create.png"></a>
+@endcan
         </div>
 <div class="col-md-2">
       
@@ -77,12 +79,13 @@
                     <td class='text-center'><small class="text-muted">{{ $tareas->estados }}  </small></td> 
                     <td class='text-center'><small class="text-muted ">{{ $tareas->cantidad_registros }}</small></td> 
               
-          
+                    @can('temp.index')
                     <td class='text-center'>
+                   
                     @if($tareas->cerrada == 'on')
                     <button type="button" class="btn btn-light">
                    
-                        
+                
                     <a id="tareay" href="{{ route('temp.index', $tareas->id) }}"> <img src="http://192.168.1.107/auditoria/public/iconos/trabajar.png" width="30" height="30">  <span class="badge badge-light">@foreach ($gestionestem->where('tarea_id',$tareas->id) as $gestionestems) {{ $gestionestems->gestion }}@endforeach</span></a> 
                     </button>
                 
@@ -91,32 +94,42 @@
                     <span class="badge badge-danger">Culminada</span>@foreach ($gestionestem->where('tarea_id',$tareas->id) as $gestionestems) {{ $gestionestems->gestion }}@endforeach
                     @endif
                     </td> 
+                    @endcan
+                    @can('tarea.show')
                     <td > 
                         <a href="{{ route('evaluacion.show', $tareas->id) }}"><img src="{{ asset('icono/svg/eye.svg') }} "   width="30" height="30" ></a>
                     </td>
+                    @endcan
+                   
                     <td> 
                         <a href="{{ route('tarea.descargar',$tareas->id) }}"  ><img src="{{ asset('icono/svg/cloud-download.svg') }}  " width="30" height="30"></a>            
+                    </td>
+                    <td> 
+                        <a href="{{ route('tareadetalle.descargar',$tareas->id) }}"  ><img src="{{ asset('icono/svg/paperclip.svg') }}  " width="30" height="30"></a>            
                     </td>
                     <td> 
                         <a href="#" class="btnx" ><img src="{{ asset('icono/svg/pie-chart.svg') }}  " width="30" height="30"></a>
             
                     </td>
-                    @if( auth()->user()->idpermiso  == 2 || auth()->user()->idpermiso  == 1)
+                  
+                    @can('tarea.edit')
                     <td> 
                         <a href="{{ route('tarea.edit',$tareas->id) }}"  ><img src="{{ asset('icono/svg/brush.svg') }}  " width="30" height="30" onclick="return confirm('¿ ESTAS SEGURO QUE DESEAS ACTUALIZAR ESTA TAREA ?')"></a>
             
                     </td>
-                    @endif
-                    @if( auth()->user()->idpermiso  == 1)
+                    @endcan
+                    @can('tarea.destroy')
+                 
                      <td > 
                     
                             {!! Form::open(['route' => ['tarea.destroy', $tareas->id], 'method' => 'DELETE']) !!}
 
-                                <button type="submit" onclick="return confirm('¿ ESTAS SEGURO QUE DESEAS ELIMINAR ?')">  <img src="http://192.168.1.107/auditoria/public/iconos/delete.png" width="30" height="30"></button>
+                                <button type="submit" onclick="return confirm('¿ ESTAS SEGURO QUE DESEAS ELIMINAR ?')">  <img src="{{ asset('icono/svg/delete.svg') }}  " width="20" height="20"></button>
                             {!! Form::close() !!}
   
                     </td>
-                    @endif
+                    @endcan
+                  
                 </tr>
               
                            
@@ -350,9 +363,8 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js'></script>
 <script src='https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels'></script>
 <script src="{{ asset('js/Chart.min.js') }}" ></script>
-<script src="{{ asset('js/indicador.js') }}" ></script>
 <script src="{{ asset('js/indicador2.js') }}" ></script>
+<!--<script src="{{ asset('js/indicador.js') }}" ></script>
 <script src="{{ asset('js/indicador3.js') }}" ></script>
-
-<script src="{{ asset('js/indicador4.js') }}" ></script>
+<script src="{{ asset('js/indicador4.js') }}" ></script>-->
 @endsection

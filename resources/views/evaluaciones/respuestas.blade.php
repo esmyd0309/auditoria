@@ -49,9 +49,9 @@
                                                 </select>
                                             @else <!-- si no es abierta busca las respuestas cerradas-->
                                                 <select name="respuesta_id[]"  class="form-control">    
-                                                        <option value="">No Aplica...</option>
+                                                        <option value="">Descalificación: 0</option>
                                                     @foreach ($pregunta->respuestas as $repuestass)
-                                                    <option value="{{ $repuestass->id }}"  {{ (isset($repuestass->id) || old('id'))? :"" }}>{{ $repuestass->respuesta }} <b>{{ ' --> Valor: '.$repuestass->pregunta->peso }}</b></option>
+                                                    <option value="{{ $repuestass->id }}"  {{ (isset($repuestass->id) || old('id'))? :"" }}><b>{{ 'Descalificación: '.$repuestass->pregunta->peso }}</b> <strong>| Respuesta:</strong> {{ $repuestass->respuesta }} </option>
                                                     @endforeach 
                                                 </select>
 
@@ -97,7 +97,7 @@
                             </audio><br>
                             <div class="col-md-8">
                            <label for="" class="btn btn-sm">{{ $audioxs->start_time }}</label> 
-                            
+                           <input name="fechagestion" type="hidden" value="{{ $audioxs->start_time  }}">
                     
                             <input name="file" type="hidden" value=" {{ $audioxs->location }} " ><br>
                             </div>

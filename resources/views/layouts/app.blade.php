@@ -86,7 +86,7 @@ body {
                     <ul class="navbar-nav mr-auto">
 
                        
-
+                    @can('plantillas.index')
                         <li class="nav-item dropdown">
 
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre href="#">Plantillas</a>
@@ -97,28 +97,30 @@ body {
                             </div>
                         </li>
                         
-                       
-                        
+                        @endcan
+                        @can('tarea')
                         <li class="nav-item dropdown">
 
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre href="#">Tareas</a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('tarea') }}">Lista</a>
+                                @can('tarea.create')
                                 <a class="dropdown-item" href="{{ route('tarea.create') }}">Crear</a>
-                            
+                                @endcan
                             </div>
                         </li>
-
+                        @endcan
                         
-                      
+                        @can('users.index')
                          <li class="nav-item">
                             <a class="nav-link" href="{{ route('users.index') }}">Usuarios</a>
                         </li>
-                        
+                        @endcan
+                        @can('roles.index')
                          <li class="nav-item">
                             <a class="nav-link" href="{{ route('roles.index') }}">Roles</a>
                         </li>
-                       
+                        @endcan
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -128,11 +130,13 @@ body {
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
+                            
                             <li class="nav-item">
                                 @if (Route::has('register'))
-                                   <!-- <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>-->
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 @endif
                             </li>
+                          
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

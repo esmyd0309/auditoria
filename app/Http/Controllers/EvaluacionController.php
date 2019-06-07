@@ -27,6 +27,7 @@ use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 use App\Exports\ReportedetalleExport;
 use App\Exports\TareaExport;
+use App\Exports\DetalleTareaExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class EvaluacionController extends Controller
@@ -99,8 +100,8 @@ class EvaluacionController extends Controller
 
     public function proce(Request $request,$id,$tarea,$seg,$path)
     { 
-       $uniqueid =$path;
-       $seg=$seg;
+        $uniqueid =$path;
+        $seg=$seg;
         $gestion_id = $id;//id de la gestion
      
 
@@ -182,6 +183,7 @@ class EvaluacionController extends Controller
         $tareas_id                  = $request->input('tareas_id');
         $comentario                 = $request->input('comentario');
         $maxima_calificacion        = $request->input('maxima_calificacion');
+        $fecha        = $request->input('fechagestion');
         
         $seg = $request->input('seg');
        // dd($request);
@@ -194,7 +196,7 @@ class EvaluacionController extends Controller
          $evaluacion->plantillas_id = $plantilla_id;
          $evaluacion->tarea_id = $tareas_id;
          $evaluacion->status = 1;
-
+         $evaluacion->fecha = $fecha;
          $evaluacion->grabacion =$request->input('file');
 
 
@@ -568,7 +570,7 @@ for ($i=0;$i<count($respuesta_id);$i++) //recorro el array que me viene del sele
         $date = new DateTime(); 
         $d= $date->format('Y-m-d H:i:s');
         return (new ReportedetalleExport($id))->download($d .'Gestion'. $id .'.xls');
-        //return Excel::download(new ReportedetalleExport, 'users.xlsx');
+      
     }
 
     public function exporttarea($id){
@@ -576,7 +578,14 @@ for ($i=0;$i<count($respuesta_id);$i++) //recorro el array que me viene del sele
         $d= $date->format('Y-m-d H:i:s');
         
         return (new TareaExport($id))->download($d .'Tarea'. $id .'.xls');
-        //return Excel::download(new ReportedetalleExport, 'users.xlsx');
+       
+    }
+    public function exporttareadetalle($id){
+        $date = new DateTime(); 
+        $d= $date->format('Y-m-d H:i:s');
+        
+        return (new DetalleTareaExport($id))->download($d .'Tarea_Detalle'. $id .'.xls');
+       
     }
     
      /**
