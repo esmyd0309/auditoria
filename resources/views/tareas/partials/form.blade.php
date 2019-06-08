@@ -94,6 +94,8 @@
         <option value="VTI">Venta Incompleta</option>
         <option value="VI">Venta Interesado</option>
         
+        <option value="RECD">RECORDATORIO TITULAR</option>
+        <option value="RECDT">RECORDATORIO TERCERO</option>
         
     @if ($errors->has('estados'))
         <span class="invalid-feedback" role="alert">
