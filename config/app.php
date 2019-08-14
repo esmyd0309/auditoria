@@ -161,7 +161,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Styde\Html\HtmlServiceProvider::class,
-        
+        Barryvdh\DomPDF\ServiceProvider::class,
         Laraveles\Spanish\SpanishServiceProvider::class,
 
         /*
@@ -226,7 +226,7 @@ return [
         'Storage' => Illuminate\Support\Facades\Storage::class,
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
-
+        'PDF' => Barryvdh\DomPDF\Facade::class,
         'Shinobi' => Caffeinated\Shinobi\Facades\Shinobi::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,

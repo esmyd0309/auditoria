@@ -16,7 +16,8 @@ use Datetime;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 
-
+use Yajra\DataTables\QueryDataTable;
+use Yajra\DataTables\DataTables;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Storage;
@@ -84,9 +85,9 @@ class TempgestioneController extends Controller
                    ");
                    
 $date = new DateTime(); // Por defecto la hora actual
-$call_date = $date->modify('-20 minutes');
+$call_date = $date->modify('-10 minutes');
 $ds= $call_date->format('Y-m-d');
-//dd($fechahasta);
+//dd($fechadesde);
 
 $gestiontm = DB::connection('asterisk')->table('vicidial_list')
             ->join('vicidial_log', 'vicidial_list.lead_id', '=', 'vicidial_log.lead_id')
@@ -108,10 +109,10 @@ $gestiontm = DB::connection('asterisk')->table('vicidial_list')
             ->whereNotIn('vicidial_log.lead_id',$gestions_idx)
             ->where('vicidial_log.call_date','>=',$fechadesde)
              //sacar por fechas desde
-            //->where('vicidial_log.call_date','<=',$fechahasta) //sacar por fechas desde  
+            ->where('vicidial_log.call_date','<=',$fechahasta) //sacar por fechas desde  
            //
-            ->orderBy('vicidial_log.uniqueid', 'desc')
-            ->take(200)->get();
+           // ->orderBy('vicidial_log.uniqueid', 'desc')
+            ->take(350)->get();
             //->paginate(10);
 
 /*
@@ -206,7 +207,7 @@ LIMIT 10
 
         //dd($gestiontm);
 
-       // return response()->json($gestiontm);
+        //return response()->json($gestiontm);
      return view('temp.index', compact('gestiontm','idtarea','evaluaciones','gestionados','audiox','results'));
 
 }

@@ -499,7 +499,7 @@ for ($i=0;$i<count($respuesta_id);$i++) //recorro el array que me viene del sele
         ->get();
 
 
-       // dd($gestiontm);
+        //dd($id);
         return view('evaluaciones.detalle', compact('gestiontm','evaluacion'));
 
     }
@@ -629,6 +629,23 @@ for ($i=0;$i<count($respuesta_id);$i++) //recorro el array que me viene del sele
 
     }
 
+    public function indicadores3(Request $request)
+    {
+        $id = $request->input('id');
+
+         /**promedio de cada pregunta seleccionada */
+        $results = DB::select(" 
+        
+        SELECT ROUND(100-AVG(a.calificacion),2) AS promediox,b.pregunta AS preguntax 
+        from pregunts_respuests AS a , preguntas AS b WHERE a.preguntas_id=b.id AND tarea_id=$id
+        GROUP BY b.pregunta   
+        ");
+      
+        return response()->json($results);
+ 
+
+    }
+
     public function indica_llamadas(Request $request)
     {
         $id = $request->input('id');
@@ -687,6 +704,28 @@ for ($i=0;$i<count($respuesta_id);$i++) //recorro el array que me viene del sele
        // dd($request);
 
     }
+
+    public function auditores(Request $request)
+    {
+      
+        $date = new DateTime(); 
+        $d= $date->format('Y-m-d');
+         /**promedio de cada pregunta seleccionada */
+        $results = DB::select(" 
+        
+        SELECT COUNT(a.users_id) AS cantidad, b.NAME
+        FROM evaluacions AS a, users AS b 
+        WHERE a.created_at >= '$d'
+        AND a.users_id=b.id
+        GROUP BY b.name
+        ");
+      
+        return response()->json($results);
+ 
+
+    }
+
+  
 
     
 }

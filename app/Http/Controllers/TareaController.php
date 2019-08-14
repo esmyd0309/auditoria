@@ -253,4 +253,17 @@ class TareaController extends Controller
         return redirect()->route('tarea')->with('info', 'Eliminado Correctamente');
     
     }
+
+    public function live()
+    {
+        $campana = DB::connection('asterisk')
+        ->select("SELECT COUNT(a.user) AS cantidad,a.campaign_id,a.extension, b.user_group 
+                    FROM vicidial_live_agents AS a, vicidial_users AS b
+                    WHERE a.USER=b.USER 
+                    GROUP BY a.campaign_id, b.user_group ORDER BY user_group desc ");
+      return response()->json($campana);
+    
+    }
+    
+
 }

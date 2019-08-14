@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 */
 Auth::routes();
-Route::get('/users/create','RegisterController@create')->name('users.create');
+//Route::get('/users/create','RegisterController@create')->name('users.create');
 Route::get('/', 'HomeController@index')->name('home');
 //Route::resource('/plantillas', 'PlantillaController');
 
@@ -58,11 +58,19 @@ Route::get('/evaluacion/{id}/detalle','EvaluacionController@detalle')->name('act
 
 Route::POST('indicadores', 'EvaluacionController@indicadores');
 Route::POST('indicadores2', 'EvaluacionController@indicadores2');
+Route::POST('indicadores3', 'EvaluacionController@indicadores3');
 Route::POST('indica_llamadas', 'EvaluacionController@indica_llamadas');
 Route::POST('cantpreguntasAgente', 'EvaluacionController@cantpreguntasAgente');
 Route::POST('detalleagente', 'EvaluacionController@detalleagente');
+Route::get('auditores', 'EvaluacionController@auditores');
 
+/**reportes de calidad */
 
+Route::resource('calidad', 'CalidadController');
+Route::post('consulta', 'CalidadController@consulta')->name('consulta.ejecuta');
+Route::get('pdf', 'CalidadController@pdf')->name('pdf');
+/**campañas que se encuentran en linea del predictivo para la vista de tareas.  */
+Route::get('live', 'TareaController@live');
 //Route::resource('evaluacion','EvaluacionController');
 Route::post('/evaluacion/store','EvaluacionController@store')->name('evaluacion.store');
 Route::get('/menu','HomeController@menu')->name('menu');

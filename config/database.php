@@ -86,11 +86,11 @@ return [
 
         'sqlsrv' => [
             'driver' => 'sqlsrv',
-            'host' => env('DB_HOST', 'localhost'),
+            'host' => env('DB_HOST', '192.168.1.100'),
             'port' => env('DB_PORT', '1433'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'database' => env('DB_DATABASE', 'sii_cobranza'),
+            'username' => env('DB_USERNAME', 'sii'),
+            'password' => env('DB_PASSWORD', '123'),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,

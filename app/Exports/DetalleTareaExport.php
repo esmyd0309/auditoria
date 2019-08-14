@@ -40,7 +40,7 @@ class DetalleTareaExport implements FromQuery,WithHeadings
             'Cedula',
             'Duracion de llamada',
             'Grabacion',
-            'Auditor',
+           // 'Auditor',
             
             
         ];
@@ -65,7 +65,7 @@ class DetalleTareaExport implements FromQuery,WithHeadings
         'plantillas.nombre as Plantilla',
         'preguntas.pregunta as Preguntas',
         'preguntas.peso as Peso',
-        'respuestas.respuesta',
+       // 'respuestas.respuesta',
         'pregunts_respuests.calificacion as descalificacion',
         'evaluacions.calificacion as calificacion',
         'pregunts_respuests.comentario',
@@ -75,10 +75,11 @@ class DetalleTareaExport implements FromQuery,WithHeadings
         'pregunts_respuests.cedula AS cliente',
         'pregunts_respuests.seg',
         'pregunts_respuests.grabacion',
-        'users.name as Auditor')
+        'users.name as Auditor'
+       )
         ->from('pregunts_respuests')
         ->join('preguntas', 'pregunts_respuests.preguntas_id', '=', 'preguntas.id')
-        ->join('respuestas', 'pregunts_respuests.respuestas_id', '=', 'respuestas.id')
+      //  ->join('respuestas', 'pregunts_respuests.respuestas_id', '=', 'respuestas.id')
         ->join('evaluacions', 'pregunts_respuests.evaluacions_id', '=', 'evaluacions.id')
         ->join('users', 'evaluacions.users_id', '=', 'users.id')
         ->join('plantillas', 'evaluacions.plantillas_id', '=', 'plantillas.id')

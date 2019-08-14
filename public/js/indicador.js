@@ -8,8 +8,8 @@ $(document).ready(function(){
     $('#indicador').hide();
    
    /**leemos el contenido para traer el id seleccionado */
-    $('.table tbody').on('click','.btnx',function(){
-    
+    $('.table tbody').on('click','.btnx',function(e){
+        e.preventDefault();
         var cole = $(this).closest('tr');
         var id = cole.find('td:eq(0)').text();///obtengo el id de la lista
         var tareax = cole.find('td:eq(2)').text();

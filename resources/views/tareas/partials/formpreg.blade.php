@@ -39,6 +39,20 @@
 </div>
 
 
+<div class="form-group">
+    <ul class="list-unstyled">
+        @foreach($departamento as $departamentos)
+            <li>
+                <label>
+                    {{ Form::checkbox('departamentos_id[]', $departamentos->id, null) }}
+                    {{ $departamentos->user_group }} {{ $departamentos->supervisora }}
+                    <em></em>
+                </label>
+            </li>
+            @endforeach
+    </ul>
+
+</div>
 
    <div class="[ form-group ]">
             <input type="checkbox" name="status" id="fancy-checkbox-success" autocomplete="off" value="{{ $tarea->status }}"  />
