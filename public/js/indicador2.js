@@ -20,7 +20,7 @@ $(document).ready(function(){
         /**CALIFICACIONES */
         $.ajax({
             type: 'POST',
-            url: 'http://192.168.1.107/auditoria/public/indicadores2',
+            url: 'http://www.auditoria.damplus.net/cantpreguntasAgenteindicadores2',
             data:  { id }, 
 
             success: function(data) {
@@ -211,7 +211,7 @@ $(document).ready(function(){
            /**CALIFICACIONES */
            $.ajax({
             type: 'POST',
-            url: 'http://192.168.1.107/auditoria/public/indicadores2',
+            url: 'http://www.auditoria.damplus.net/cantpreguntasAgenteindicadores2',
             data:  { id }, 
 
             success: function(data) {
@@ -436,7 +436,7 @@ $(document).ready(function(){
    
        $.ajax({
          type: 'POST',
-         url: 'http://192.168.1.107/auditoria/public/cantpreguntasAgente',
+         url: 'http://www.auditoria.damplus.net/cantpreguntasAgentecantpreguntasAgente',
          data:  { id },
         
          success: function(data) {
@@ -457,7 +457,7 @@ $(document).ready(function(){
   
       $.ajax({
         type: 'POST',
-        url: 'http://192.168.1.107/auditoria/public/detalleagente',
+        url: 'http://www.auditoria.damplus.net/cantpreguntasAgentedetalleagente',
         data:  { id },
        
         success: function(data) {
@@ -482,7 +482,7 @@ $(document).ready(function(){
   var meta = $("#meta");
     $.ajax({
       type: 'POST',
-      url: 'http://192.168.1.107/auditoria/public/indica_llamadas',
+      url: 'http://www.auditoria.damplus.net/cantpreguntasAgenteindica_llamadas',
       data:  { id },
    
       success: function(data) {
@@ -506,7 +506,7 @@ $(document).ready(function(){
 
   $.ajax({
     type: 'POST',
-    url: 'http://192.168.1.107/auditoria/public/cantpreguntasAgente',
+    url: 'http://www.auditoria.damplus.net/cantpreguntasAgentecantpreguntasAgente',
     data:  { id }, 
 
     success: function(data) {
@@ -695,7 +695,7 @@ $(document).ready(function(){
 
 $.ajax({
   type: 'POST',
-  url: 'http://192.168.1.107/auditoria/public/indicadores',
+  url: 'http://www.auditoria.damplus.net/cantpreguntasAgenteindicadores',
   data:  { id }, 
 
   success: function(data) {
@@ -876,7 +876,7 @@ $.ajax({
 
 $.ajax({
   type: 'POST',
-  url: 'http://192.168.1.107/auditoria/public/indicadores3',
+  url: 'http://www.auditoria.damplus.net/cantpreguntasAgenteindicadores3',
   data:  { id }, 
 
   success: function(data) {

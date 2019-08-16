@@ -6,7 +6,7 @@ $(document).ready(function(){
    
     
     var tablaDatos = $("#live");
-    var route = "http://192.168.1.107/auditoria/public/live";
+    var route = "http://www.auditoria.damplus.net/cantpreguntasAgentelive";
     $.get(route, function(res){
         $(res).each(function(key,value){
             

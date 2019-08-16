@@ -24,7 +24,7 @@ $(document).ready(function(){
     
         $.ajax({
           type: 'POST',
-          url: 'http://192.168.1.107/auditoria/public/cantpreguntasAgente',
+          url: 'http://www.auditoria.damplus.net/cantpreguntasAgentecantpreguntasAgente',
           data:  { id },
          
           success: function(data) {
@@ -45,7 +45,7 @@ $(document).ready(function(){
    
        $.ajax({
          type: 'POST',
-         url: 'http://192.168.1.107/auditoria/public/detalleagente',
+         url: 'http://www.auditoria.damplus.net/cantpreguntasAgentedetalleagente',
          data:  { id },
         
          success: function(data) {
