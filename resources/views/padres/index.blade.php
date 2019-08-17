@@ -11,7 +11,7 @@
                     Archivos
                     <a href="{{ route('padres.create') }}" 
                         class=" float-right ">
-                        <img src="http://192.168.1.107/ventas/public/iconos/up.png" onfocus="displayFocus();">
+                        <img src="http://www.auditoria.damplus.net/iconos/up.png" onfocus="displayFocus();">
                     </a>
                 </div>
                 <br>

@@ -70,7 +70,7 @@ Route::resource('calidad', 'CalidadController');
 Route::post('consulta', 'CalidadController@consulta')->name('consulta.ejecuta');
 Route::get('pdf', 'CalidadController@pdf')->name('pdf');
 /**campañas que se encuentran en linea del predictivo para la vista de tareas.  */
-Route::get('live', 'TareaController@live');
+Route::get('/live', 'TareaController@live');
 //Route::resource('evaluacion','EvaluacionController');
 Route::post('/evaluacion/store','EvaluacionController@store')->name('evaluacion.store');
 Route::get('/menu','HomeController@menu')->name('menu');
