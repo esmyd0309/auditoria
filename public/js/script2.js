@@ -3,7 +3,7 @@ $(document).ready(function(){
 
     
     var tablaDatos = $("#datos");
-    var route = "http://www.auditoria.damplus.net/cantpreguntasAgentepadres/listas";
+    var route = "http://www.auditoria.damplus.net/padres/listas";
     $.get(route, function(res){
         $(res).each(function(key,value){
             

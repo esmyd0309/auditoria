@@ -20,7 +20,7 @@
                             <div class="col-sm-6">
                                 <div class="card">
                                     <div class="card-body">
-                                        <a  href="{{ url('/plantillas') }}" ><img class="card-img-top" src="http://www.auditoria.damplus.net/cantpreguntasAgentegestiones.png" width="100px" height="100px" alt="Card image cap"></a>
+                                        <a  href="{{ url('/plantillas') }}" ><img class="card-img-top" src="http://www.auditoria.damplus.net/gestiones.png" width="100px" height="100px" alt="Card image cap"></a>
                                         <h5 class="card-title"> <b> Plantillas</b>  </h5><br>
                                     </div>
                                 </div>
@@ -30,7 +30,7 @@
                             <div class="col-sm-6">
                                 <div class="card">
                                     <div class="card-body">
-                                        <a  href="{{ url('tarea') }}" ><img class="card-img-top" src="http://www.auditoria.damplus.net/cantpreguntasAgenteindicadores.png" width="100px" height="100px" alt="Card image cap"></a>
+                                        <a  href="{{ url('tarea') }}" ><img class="card-img-top" src="http://www.auditoria.damplus.net/indicadores.png" width="100px" height="100px" alt="Card image cap"></a>
                                                 <h5 class="card-title"> <b> Tareas</b>  </h5><br>
                                     </div>
                                 </div>
@@ -43,7 +43,7 @@
                             <div class="col-sm-6">
                                 <div class="card">
                                     <div class="card-body">
-                                        <a  href="{{ route('calidad.index') }}" ><img class="card-img-top" src="http://www.auditoria.damplus.net/cantpreguntasAgentecalidad.jpg" width="100px" height="100px" alt="Card image cap"></a>
+                                        <a  href="{{ route('calidad.index') }}" ><img class="card-img-top" src="http://www.auditoria.damplus.net/calidad.jpg" width="100px" height="100px" alt="Card image cap"></a>
                                         <h5 class="card-title"> <b> Reporte de Calidad</b>  </h5>
                                     </div>
                                 </div>
@@ -53,7 +53,7 @@
                             <div class="col-sm-6">
                                 <div class="card">
                                     <div class="card-body">
-                                        <a  href="{{ url('/users') }}" ><img class="card-img-top" src="http://www.auditoria.damplus.net/cantpreguntasAgenteusers.jpg" width="100px" height="100px" alt="Card image cap"></a>
+                                        <a  href="{{ url('/users') }}" ><img class="card-img-top" src="http://www.auditoria.damplus.net/users.jpg" width="100px" height="100px" alt="Card image cap"></a>
                                         <h5 class="card-title"> <b> Usuarios</b>  </h5>
                                     </div>
                                 </div>

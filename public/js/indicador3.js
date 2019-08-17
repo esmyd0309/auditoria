@@ -27,7 +27,7 @@ $(document).ready(function(){
       var meta = $("#meta");
         $.ajax({
           type: 'POST',
-          url: 'http://www.auditoria.damplus.net/cantpreguntasAgenteindica_llamadas',
+          url: 'http://www.auditoria.damplus.net/indica_llamadas',
           data:  { id },
        
           success: function(data) {
@@ -51,7 +51,7 @@ $(document).ready(function(){
   
       $.ajax({
         type: 'POST',
-        url: 'http://www.auditoria.damplus.net/cantpreguntasAgentecantpreguntasAgente',
+        url: 'http://www.auditoria.damplus.net/cantpreguntasAgente',
         data:  { id }, 
 
         success: function(data) {
@@ -241,7 +241,7 @@ $(document).ready(function(){
 
     $.ajax({
       type: 'POST',
-      url: 'http://www.auditoria.damplus.net/cantpreguntasAgenteindicadores',
+      url: 'http://www.auditoria.damplus.net/indicadores',
       data:  { id }, 
 
       success: function(data) {
