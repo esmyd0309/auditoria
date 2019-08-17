@@ -35,7 +35,7 @@ footer {
   
 }
 body {
-        background-image: url("http://192.168.1.107/auditoria/public/fondos.jpg");
+        background-image: url("http://www.auditoria.damplus.net/fondos.jpg");
     }
 
 .form-group input[type="checkbox"] {
@@ -74,7 +74,7 @@ body {
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                 <a class="navbar-brand" href="{{ url('/') }}" style="background-color: #d7f3e3;">
-                   <img src="http://192.168.1.107/auditoria/public/logo.jpg" alt="DatamarketingPlus">
+                   <img src="http://www.auditoria.damplus.net/logo.jpg" alt="DatamarketingPlus">
                 </a>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

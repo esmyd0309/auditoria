@@ -30,7 +30,7 @@
                 </div>
             <div class="col-md-2">
                 @can('tarea.create')
-                <a href="{{ route('tarea.create') }}" ><img src="http://192.168.1.107/auditoria/public/iconos/create.png"></a>
+                <a href="{{ route('tarea.create') }}" ><img src="http://www.auditoria.damplus.net/iconos/create.png"></a>
                 @endcan
             </div>
             <div class="col-md-4" >
@@ -98,7 +98,7 @@
                     <button type="button" class="btn btn-light">
                    
                 
-                    <a id="tareay" href="{{ route('temp.index', $tareas->id) }}"> <img src="http://192.168.1.107/auditoria/public/iconos/trabajar.png" width="30" height="30">  <span class="badge badge-light">@foreach ($gestionestem->where('tarea_id',$tareas->id) as $gestionestems) {{ $gestionestems->gestion }}@endforeach</span></a> 
+                    <a id="tareay" href="{{ route('temp.index', $tareas->id) }}"> <img src="http://www.auditoria.damplus.net/iconos/trabajar.png" width="30" height="30">  <span class="badge badge-light">@foreach ($gestionestem->where('tarea_id',$tareas->id) as $gestionestems) {{ $gestionestems->gestion }}@endforeach</span></a> 
                     </button>
                 
                     @else
