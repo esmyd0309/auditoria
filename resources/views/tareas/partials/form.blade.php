@@ -82,7 +82,7 @@
         <option value="CMP">Compromiso Titular  </option>
         <option value="CMPT">Compromiso Tercero </option>
         <option value="EF">Efectivo Titular</option>
-        <option value="EF">Efectivo Tercero</option>
+        <option value="EFT">Efectivo Tercero</option>
 
         <option value="NAP">No Aplican</option>
 
