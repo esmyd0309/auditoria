@@ -72,7 +72,7 @@
 {{ form::label('estados', 'Estados de Gestion') }}
 <select name="estados" class="browser-default custom-select" class="form-control{{ $errors->has('estados') ? ' is-invalid' : ''  }}" autofocus>
     <option value="">-- Estados --</option>
-    
+    <option value="ACT">ACTUALIZACION DATOS</option>
         <option value="A">Automaticos  </option>
         <option value="CALLBK">Volver a LLamar  </option>
         <option value="DNC">No Desea  </option>
