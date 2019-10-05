@@ -112,7 +112,7 @@ $gestiontm = DB::connection('asterisk')->table('vicidial_list')
             ->where('vicidial_log.call_date','<=',$fechahasta) //sacar por fechas desde  
            //
            // ->orderBy('vicidial_log.uniqueid', 'desc')
-            ->take(350)->get();
+            ->take(500)->get();
             //->paginate(10);
 
 /*
