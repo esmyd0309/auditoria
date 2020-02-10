@@ -3,7 +3,7 @@ $(document).ready(function(){
 
     
     var tablaDatos = $("#auditor");
-    var route = "http://www.auditoria.damplus.net/auditores";
+    var route = "http://auditoria.damplus.net/auditores";
     $.get(route, function(res){
         $(res).each(function(key,value){
      /**gestiones de los auditores del dia */

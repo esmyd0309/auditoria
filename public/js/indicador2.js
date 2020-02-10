@@ -20,7 +20,7 @@ $(document).ready(function(){
         /**CALIFICACIONES */
         $.ajax({
             type: 'POST',
-            url: 'http://www.auditoria.damplus.net/indicadores2',
+            url: 'http://auditoria.damplus.net/indicadores2',
             data:  { id }, 
 
             success: function(data) {
@@ -211,7 +211,7 @@ $(document).ready(function(){
            /**CALIFICACIONES */
            $.ajax({
             type: 'POST',
-            url: 'http://www.auditoria.damplus.net/indicadores2',
+            url: 'http://auditoria.damplus.net/indicadores2',
             data:  { id }, 
 
             success: function(data) {
@@ -436,7 +436,7 @@ $(document).ready(function(){
    
        $.ajax({
          type: 'POST',
-         url: 'http://www.auditoria.damplus.net/cantpreguntasAgente',
+         url: 'http://auditoria.damplus.net/cantpreguntasAgente',
          data:  { id },
         
          success: function(data) {
@@ -457,7 +457,7 @@ $(document).ready(function(){
   
       $.ajax({
         type: 'POST',
-        url: 'http://www.auditoria.damplus.net/detalleagente',
+        url: 'http://auditoria.damplus.net/detalleagente',
         data:  { id },
        
         success: function(data) {
@@ -482,7 +482,7 @@ $(document).ready(function(){
   var meta = $("#meta");
     $.ajax({
       type: 'POST',
-      url: 'http://www.auditoria.damplus.net/indica_llamadas',
+      url: 'http://auditoria.damplus.net/indica_llamadas',
       data:  { id },
    
       success: function(data) {
@@ -506,7 +506,7 @@ $(document).ready(function(){
 
   $.ajax({
     type: 'POST',
-    url: 'http://www.auditoria.damplus.net/cantpreguntasAgente',
+    url: 'http://auditoria.damplus.net/cantpreguntasAgente',
     data:  { id }, 
 
     success: function(data) {
@@ -695,7 +695,7 @@ $(document).ready(function(){
 
 $.ajax({
   type: 'POST',
-  url: 'http://www.auditoria.damplus.net/indicadores',
+  url: 'http://auditoria.damplus.net/indicadores',
   data:  { id }, 
 
   success: function(data) {
@@ -876,7 +876,7 @@ $.ajax({
 
 $.ajax({
   type: 'POST',
-  url: 'http://www.auditoria.damplus.net/indicadores3',
+  url: 'http://auditoria.damplus.net/indicadores3',
   data:  { id }, 
 
   success: function(data) {
@@ -1061,7 +1061,7 @@ $('#indicador').show();
    
 
     var tablaDatos = $("#live");
-    var route = "http://www.auditoria.damplus.net/live";
+    var route = "http://auditoria.damplus.net/live";
     $.get(route, function(res){
         $(res).each(function(key,value){
             
